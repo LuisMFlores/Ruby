@@ -21,3 +21,17 @@ puts 3 > 2 #true
 puts (5+5) == 10 #true
 puts 3 <= 2 #false
 puts 3 >= 3 #true
+
+# Booleans
+puts false && false #false
+puts false && true #false
+puts true && false #false
+puts true && true #true
+
+puts !true #false
+puts !false #true
+
+puts false || false #false
+puts true || false #true
+puts false || true #true
+puts true || true #true
