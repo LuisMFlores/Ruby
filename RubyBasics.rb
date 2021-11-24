@@ -50,3 +50,19 @@ puts "My" + " " + "name" + " " + "is" + " " + "Luis" #My name is Luis
 puts "Luis".length #4
 puts "Luis"[0] #L
 puts "Luis"["Luis".length - 1] #s
+
+# Varibles
+
+location = "Tampa" #Tampa
+puts location #Tampa
+my_num = 42
+puts my_num + 8 #50
+sec_num = 8 #8
+my_num = sec_num #8
+sec_num = 5 #5
+p my_num #8
+p sec_num #5
+
+new_location = location #Tampa
+new_location[0] = "L" #L
+puts location #Lampa
