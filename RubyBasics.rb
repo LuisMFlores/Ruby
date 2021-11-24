@@ -42,3 +42,11 @@ puts true || true #true
 p 42 #prints the information of data type
 print "42" #prints without newline
 puts "42" #prints with new line
+
+# Strings
+
+puts "Hello World" #Hello World
+puts "My" + " " + "name" + " " + "is" + " " + "Luis" #My name is Luis
+puts "Luis".length #4
+puts "Luis"[0] #L
+puts "Luis"["Luis".length - 1] #s
