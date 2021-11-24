@@ -23,6 +23,7 @@ puts 3 <= 2 #false
 puts 3 >= 3 #true
 
 # Booleans
+
 puts false && false #false
 puts false && true #false
 puts true && false #false
@@ -35,3 +36,9 @@ puts false || false #false
 puts true || false #true
 puts false || true #true
 puts true || true #true
+
+# Priting data
+
+p 42 #prints the information of data type
+print "42" #prints without newline
+puts "42" #prints with new line
