@@ -66,3 +66,42 @@ p sec_num #5
 new_location = location #Tampa
 new_location[0] = "L" #L
 puts location #Lampa
+
+# Methods
+
+def say_message
+    "Hello"
+end
+
+say_message
+
+def say_hello_to(user)
+    puts "Greetings " + user
+end
+
+say_hello_to("Luis") #Greetings Luis
+
+def greeting(user, message = say_message) 
+    puts message + " " + user
+end
+
+greeting("Merlin", "Hola") #Hola Merlin
+
+def calc_avg(num1, num2)
+    (num1 + num2) / 2.0
+end
+
+puts calc_avg(2,2) #2.0
+puts calc_avg(50,10) #30.0
+
+def average_of_three(num1, num2, num3)
+    (num1 + num2 + num3) / 3.0
+end
+
+puts average_of_three(7,10,13) #10.0
+
+def goodbye(name)
+    "Bye" + " " + name
+end
+
+puts goodbye("Luis") #Bye Luis
