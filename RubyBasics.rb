@@ -85,6 +85,7 @@ def greeting(user, message = say_message)
     puts message + " " + user
 end
 
+greeting("Luis") #Hello Luis
 greeting("Merlin", "Hola") #Hola Merlin
 
 def calc_avg(num1, num2)
@@ -105,3 +106,20 @@ def goodbye(name)
 end
 
 puts goodbye("Luis") #Bye Luis
+
+# Conditionals
+
+num = 0
+if num > 0
+    puts "Its positive"
+else
+    puts "Negative"
+end #Negative
+
+if num == 0
+    puts "Number is 0"
+elsif num > 0
+    puts "Number is Positive"
+else
+    puts "Number is Negative"
+end #Number is 0
