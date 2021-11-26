@@ -123,3 +123,57 @@ elsif num > 0
 else
     puts "Number is Negative"
 end #Number is 0
+
+def is_divided_by_5(number)
+    number % 5 == 0
+end
+
+puts is_divided_by_5(15) #True
+puts is_divided_by_5(21) #False
+
+def either_only(number)
+    return false if (number % 3 == 0 && number % 5 == 0) || (number % 3 == 0 && number % 5 == 0)
+    true
+end
+
+puts either_only(15) #False
+puts either_only(5) #True
+puts either_only(30) #False
+
+def larger_number(num1, num2) 
+    return num1 if num1 > num2
+    num2
+end
+
+puts larger_number(2,4) #4
+puts larger_number(4,2) #4
+puts larger_number(100,2) #100
+puts larger_number(0,1) #1
+
+def longer_string(str1, str2)
+    return str1 if str1.length > str2.length
+    str2
+end
+
+puts longer_string("Luis","Merlin") #Merlin
+puts longer_string("Luis Manuel","Merlin") #Luis Manuel
+
+def number_check(num)
+    return "Positive" if num > 0
+    return "Negative" if num < 0
+    "Zero"
+end
+
+puts number_check(10) #Positive
+puts number_check(-5) #Negative
+puts number_check(0) #Zero
+
+def word_check(str)
+    return "Long" if str.length > 6
+    return "Short" if str.length < 6
+    "Medium"
+end
+
+puts word_check("contraption") # => "long"
+puts word_check("fruit")       # => "short"
+puts word_check("puzzle")      # => "medium"
