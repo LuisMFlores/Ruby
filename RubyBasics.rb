@@ -177,3 +177,168 @@ end
 puts word_check("contraption") # => "long"
 puts word_check("fruit")       # => "short"
 puts word_check("puzzle")      # => "medium"
+
+# Loops
+
+def repeatHello()
+    counter = 0
+    while counter < 5
+        puts "Hello"
+        counter += 1
+    end
+end
+
+repeatHello # Hello(5x)
+
+def print_nums
+    i = 0
+    while i <= 100
+        puts i
+        i +=1
+    end
+end
+
+print_nums # Prints number 1-100
+
+def print_backwards
+    i = 10
+    while i >= 0
+        puts i
+        i -= 1
+    end
+end
+
+puts print_backwards # Print numbers 10-0
+
+def print_min_max(min,max)
+    print_min_max_step(min,max,1)
+end
+
+def print_min_max_step(min,max,step,inclusive = true)
+    i = min
+    new_max = max
+    new_max = max + 1 if inclusive
+    while i < new_max
+        puts i
+        i += step
+    end
+end
+
+print_min_max(2,20) #Print 2 - 20 
+print_min_max_step(1,100,5) #print 1-100 stepping thru 5
+print_min_max_step(1,106,5,false) #Print 1-100 stepping thru 5 not including 106
+
+def iterating_thru_string(str)
+    i = 0
+    while i < str.length
+        puts str[i]
+        i += 1
+    end
+end
+
+iterating_thru_string("Luis") #Print L\nu\ni\ns\n
+
+#Break and next
+def skip_every_3_15_divisible(min,max)
+    i = min
+    while i < max
+        if (i % 3 == 0 && i % 5 == 0)
+            i += 1
+            next
+        end
+        puts i
+        i += 1
+    end
+end
+
+skip_every_3_15_divisible(1,100) # Print every number 1 to 99 skipping every number divisible by 3 and 5
+
+def count_char(word,char,ignored_cap = true)
+    char_count = 0
+    i = 0
+    new_word = word
+    new_word = word.downcase if ignored_cap
+    while i < word.length
+        char_count += 1 if new_word[i]  == char
+        i += 1
+    end
+    char_count
+end
+
+def count_e(word)
+    count_char(word,"e")
+end
+
+puts count_e("movie") # => 1
+puts count_e("excellent") # => 3
+
+def count_a(word)
+    count_char(word,"a")
+end
+
+puts count_a("application")  # => 2
+puts count_a("bike")         # => 0
+puts count_a("Arthur")       # => 1
+puts count_a("Aardvark")     # => 3
+
+def count_vowels(word)
+    vowel_counter = 0
+    i = 0
+    while i < word.length
+        vowel_counter += 1 if word[i] == "a" || word[i] == "e" || word[i] == "i" || word[i] == "o" || word[i] == "u"
+        i += 1
+    end
+    vowel_counter
+end
+
+puts count_vowels("bootcamp")  # => 3
+puts count_vowels("apple")     # => 2
+puts count_vowels("pizza")     # => 2
+
+def sum_nums(max)
+    i = 0
+    counter = 0
+    while i <= max
+        counter += i
+        i +=  1
+    end
+    counter
+end
+
+puts sum_nums(4) # => 10, because 1 + 2 + 3 + 4 = 10
+puts sum_nums(5) # => 15
+
+def factorial(num)
+    i = 1
+    factorial = 1
+    while i <= num
+        factorial *= i
+        i += 1
+    end
+    factorial
+end
+
+puts factorial(3) # => 6, because 1 * 2 * 3 = 6
+puts factorial(5) # => 120, because 1 * 2 * 3 * 4 * 5 = 120
+
+def reverse(word)
+    i = word.length - 1
+    reversed_word = ""
+    while i >= 0
+        reversed_word += word[i]
+        i -= 1
+    end
+    reversed_word
+end
+
+puts reverse("cat")          # => "tac"
+puts reverse("programming")  # => "gnimmargorp"
+puts reverse("bootcamp")   
+
+def is_palindrome(word)
+    word == reverse(word)
+end
+
+puts is_palindrome("racecar")  # => true
+puts is_palindrome("kayak")    # => true
+puts is_palindrome("bootcamp") # => false
