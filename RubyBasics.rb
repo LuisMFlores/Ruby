@@ -543,3 +543,19 @@ end
 print fizz_buzz(20) # => [4, 6, 8, 16, 18]
 puts
 print fizz_buzz(15) # => [4, 6, 8]
+
+# Push / Pop
+puts
+friends_name_arr = ["Mario"]
+friends_name_arr.push("Celeste", "Leo").push("Merlin") # => ["Mario", "Celeste", "Leo", "Merlin"]
+print friends_name_arr
+puts
+
+print friends_name_arr.pop # => Merlin
+puts
+print friends_name_arr # => ["Mario", "Celeste", "Leo"]
+puts
+print friends_name_arr.unshift("Merlin") # => ["Merlin", "Mario", "Celeste", "Leo"]
+puts
+print friends_name_arr.shift # => "Merlin"
+puts
