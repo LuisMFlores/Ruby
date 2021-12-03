@@ -559,3 +559,13 @@ print friends_name_arr.unshift("Merlin") # => ["Merlin", "Mario", "Celeste", "Le
 puts
 print friends_name_arr.shift # => "Merlin"
 puts
+
+# Array Index / Include
+
+city_arr = ["LA", "NY", "SF", "TPA"]
+puts city_arr.index("LA") # => 0
+puts city_arr.include?("NJ") # => false
+
+str_arr = "Hello"
+puts str_arr.index("e") # => 1
+puts str_arr.include?("o") # => true
