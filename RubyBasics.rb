@@ -569,3 +569,21 @@ puts city_arr.include?("NJ") # => false
 str_arr = "Hello"
 puts str_arr.index("e") # => 1
 puts str_arr.include?("o") # => true
+
+# Reverse method
+puts
+puts str_arr.reverse # => "olleH"
+
+def is_palindrome?(word)
+    word == word.reverse
+end
+
+puts is_palindrome("civic") # true
+puts is_palindrome("opa") # false
+
+# Range slicing 
+
+puts "Hello"[0..4] # "Hello"
+puts "Luis"[1...5] # "uis"
+puts "ABC"[-1] #"C"
+puts "ABCDE"[2...-1] # "CD"
