@@ -587,3 +587,11 @@ puts "Hello"[0..4] # "Hello"
 puts "Luis"[1...5] # "uis"
 puts "ABC"[-1] #"C"
 puts "ABCDE"[2...-1] # "CD"
+
+# Split/Joint
+
+name_arr = "luis".split("")
+print name_arr # ["l", "u", "i", "s"]
+puts
+print name_arr.join # "luis"
+puts
