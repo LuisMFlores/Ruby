@@ -595,3 +595,40 @@ print name_arr # ["l", "u", "i", "s"]
 puts
 print name_arr.join # "luis"
 puts
+
+# Enumerable
+months_arr = ["Jan", "Feb", "Mar", "Apr"]
+months_arr.each do | month |
+    puts month
+    puts "---" # Print each month with dashes
+end
+
+months_arr.each_with_index do |month, idx|
+    print idx
+    puts " index is month " + month
+end
+
+people_arr = ["Luis", "Merlin", "Jean"] # ["Luis", "Merlin", "Jean"]
+people_arr.each { |person | puts person } # Print each element in the array
+
+sentence = "Hello World"
+
+sentence.each_char do |char|
+    print char # "Hello World"
+end
+
+sentence.each_char.with_index do |char, idx|
+    puts idx
+end
+
+def fizz_buzz_with_range(max_num)
+    new_arr = []
+    (0..max_num).each { |num| new_arr << num if (num % 3 == 0 && num % 5 != 0) || (num % 3 != 0 && num % 5 == 0) }
+    new_arr
+end
+
+puts fizz_buzz_with_range(100)
+
+# Times
+
+10.times { puts "Hello user" } # Will print block of code x amount of times
