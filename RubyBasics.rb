@@ -632,3 +632,160 @@ puts fizz_buzz_with_range(100)
 # Times
 
 10.times { puts "Hello user" } # Will print block of code x amount of times
+
+
+# Write a method to_initials that takes in a person's name string and returns a string representing their initials.
+# 1. create new variable to hold initials.
+# 2. split the str into a arr of word.
+# 3. iterate thru the word arr.
+# 4. append the first index char for each word.
+# 5. return the new variable thats holding the initials.
+
+# Notes can be further simplified using reduce
+def to_initials(name)
+    str_initial = ""
+    name.split(" ").each { |word| str_initial += word[0] }
+    str_initial
+end
+
+puts to_initials("Kelvin Bridges")      # => "KB"
+puts to_initials("Michaela Yamamoto")   # => "MY"
+puts to_initials("Mary La Grange")      # => "MLG"
+
+# Write a method first_in_array that takes in an array and two elements, the method should return the element that appears earlier in the array.
+# 1. iterate thru the array.
+# 2. compare each element in the array against the element passed as parameters and return whichever comes first
+def first_in_array(arr, el1, el2)
+    arr.each do | ele |
+        if ele == el1 
+            return el1
+        elsif ele == el2
+            return el2
+        end
+    end
+end
+
+puts first_in_array(["a", "b", "c", "d"], "d", "b"); # => "b"
+puts first_in_array(["cat", "bird" ,"dog", "mouse" ], "dog", "mouse"); # => "dog"
+
+# Write a method abbreviate_sentence that takes in a sentence string and returns a new sentence where every word longer than 4 characters has all of it's vowels removed
+# 1. Create new variable to hold an array of words.
+# 2. Break sentence into a word array.
+# 3. Check the length of the word and if it passes, **runs it thru another method to remove vowles**
+# 4. return joined array of words.
+
+# -- Method to remove vowels --
+# 1. Create a new method that takes in a word and returns a word
+# 2. Create new variable to hold the non vowel characters.
+# 3. Create constant that hold all the vowels.
+# 4. Loop thru the word and check againts the vowels constant.
+
+def abbreviate_sentence(sent)
+    new_sentence_word_arr = []
+    sent.split(" ").each do |word| 
+        if word.length > 4
+            new_sentence_word_arr << remove_vowels(word)
+        else
+            new_sentence_word_arr << word
+        end
+    end
+    new_sentence_word_arr.join(" ")
+end
+
+def remove_vowels(word)
+    words = "aeiou"
+    non_vowel_word = ""
+    word.each_char { |char| non_vowel_word += char if !words.include?(char)}
+    non_vowel_word
+end
+
+puts abbreviate_sentence("follow the yellow brick road") # => "fllw the yllw brck road"
+puts abbreviate_sentence("what a wonderful life")        # => "what a wndrfl life"
+
+# Write a method format_name that takes in a name string and returns the name properly capitalized.
+# 1. make the parameter lower string.
+# 2. split the sentence into array.
+# 3. capitalize each word in the array.
+# 4. return joined arr as string.
+def format_name(str)    
+    str.downcase.split(" ").each { |word| word.capitalize! }.join(" ")
+end
+
+puts format_name("chase WILSON") # => "Chase Wilson"
+puts format_name("brian CrAwFoRd scoTT") # => "Brian
+
+# A name is valid is if satisfies all of the following:
+# - contains at least a first name and last name, separated by spaces
+# - each part of the name should be capitalized
+#
+# Hint: use str.upcase or str.downcase
+# "a".upcase # => "A"
+
+def is_valid_name(str)
+    str == format_name(str)
+end
+
+puts is_valid_name("Kush Patel")       # => true
+puts is_valid_name("Daniel")           # => false
+puts is_valid_name("Robert Downey Jr") # => true
+puts is_valid_name("ROBERT DOWNEY JR") # => false
+
+# For simplicity, we'll consider an email valid when it satisfies all of the following:
+# - contains exactly one @ symbol
+# - contains only lowercase alphabetic letters before the @
+# - contains exactly one . after the @
+
+# 1. Split the email between the "@"
+# 2. Check the splitted array is exactly 2 if not return false.
+# 3. Get index of @.
+# 4. Return false if initial index to at index is not the same as lower case.
+# 5. range from at index of str to end, split the str by the dot and check the size of arr to equal 2.
+# 6. return true if all other failed.
+
+def is_valid_email(str)
+    email_splitted = str.split("@")
+    return false if email_splitted.length != 2
+
+    at_index = str.index("@")
+    numbers = "0123456789"
+    return false if str[0...at_index].downcase != str[0...at_index]
+    str[0...at_index].each_char { |char| return false if numbers.include?(char)}
+    return false if str[at_index..-1].split(".").length != 2
+
+    true
+
+end
+
+puts is_valid_email("abc@xy.z")         # => true
+puts is_valid_email("jdoe@gmail.com")   # => true
+puts is_valid_email("jdoe@g@mail.com")  # => false
+puts is_valid_email("jdoe42@gmail.com") # => false
+puts is_valid_email("jdoegmail.com")    # => false
+puts is_valid_email("az@email")         # => false
+
+# Write a method reverse_words that takes in a sentence string and returns the sentence with the order of the characters in each word reversed. Note that we need to reverse the order of characters in the words, do not reverse the order of words in the sentence.
+# 1. Break the parameter into a array.
+# 2. Iterate over the array and reversed each element.
+# 3. Joined array into a string and return it.
+def reverse_words(sent)
+    sent.split(" ").each { |word| word.reverse! }.join(" ")
+end
+
+puts reverse_words('keep coding') # => 'peek gnidoc'
+puts reverse_words('simplicity is prerequisite for reliability') # => 'yticilpmis si etisiuqererp rof ytilibailer'
+
+# Write a method rotate_array that takes in an array and a number. The method should return the array after rotating the elements the specified number of times. A single rotation takes the last element of the array and moves it to the front.
+def rotate_array(arr, num)
+    num.times { rotate(arr) }
+    arr
+end
+
+def rotate(arr) 
+    arr.unshift(arr.pop)
+end
+
+print rotate_array([ "Matt", "Danny", "Mashu", "Matthias" ], 1) # => [ "Matthias", "Matt", "Danny", "Mashu" ]
+puts
+
+print rotate_array([ "a", "b", "c", "d" ], 2) # => [ "c", "d", "a", "b" ]
+puts
