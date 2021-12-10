@@ -775,6 +775,8 @@ puts reverse_words('keep coding') # => 'peek gnidoc'
 puts reverse_words('simplicity is prerequisite for reliability') # => 'yticilpmis si etisiuqererp rof ytilibailer'
 
 # Write a method rotate_array that takes in an array and a number. The method should return the array after rotating the elements the specified number of times. A single rotation takes the last element of the array and moves it to the front.
+
+# 1.
 def rotate_array(arr, num)
     num.times { rotate(arr) }
     arr
@@ -789,3 +791,174 @@ puts
 
 print rotate_array([ "a", "b", "c", "d" ], 2) # => [ "c", "d", "a", "b" ]
 puts
+
+(1..3).each do |ele1|
+    (1..5).each do |ele2|
+        puts ele1.to_s + "---" + ele2.to_s
+    end
+end
+
+# Multi-dimensional arr
+
+# Write a method combinations that takes in an array of unique elements, the method should return a 2D array representing all possible combinations of 2 elements of the array.
+
+# 1. Loop thru the items with index.
+# 2. Loop thru the items with index + 1 and check if the index are different.
+# 3. If different, add both element to the new arr.
+# 4. Return new arr.
+
+def combinations(arr)
+    combination_arr = []
+    arr.each_with_index do |ele1, idx1|
+        arr.each_with_index do |ele2, idx2|
+            combination_arr << [ele1, ele2] if idx2 > idx1
+        end
+    end
+    combination_arr
+end
+
+print combinations(["a", "b", "c"]); # => [ [ "a", "b" ], [ "a", "c" ], [ "b", "c" ] ]
+puts
+
+print combinations([0, 1, 2, 3]); # => [ [ 0, 1 ], [ 0, 2 ], [ 0, 3 ], [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ]
+puts
+
+# Write a method opposite_count that takes in an array of unique numbers. The method should return the number of pairs of elements that sum to 0.
+# 1. Create variable to keep track of the count.
+# 2. loop thru the arr.
+# 3. check that there is an index always ahead.
+# 4. if it is, add both numbers .
+# 5. if the sum is 0 add one to the count.
+# 6. return variable containing count.
+
+def opposite_count(nums)
+    opposite_count_num = 0
+    nums.each_with_index do |ele1, idx1|
+        nums.each_with_index do |ele2, idx2|
+            opposite_count_num += 1 if (idx2 > idx1) && (ele1 + ele2 == 0)
+        end
+    end
+    opposite_count_num
+end
+
+puts opposite_count([ 2, 5, 11, -5, -2, 7 ]) # => 2
+puts opposite_count([ 21, -23, 24 -12, 23 ]) # => 1
+
+# Write a method two_d_Sum that takes in a two dimensional array and returns the sum of all elements in the array.
+
+# create sum var
+# loop thru 2d arr
+# loop thru each 2 level of the 2d arr
+# add each item to the sum var
+# return sum var
+
+def two_d_sum(arr)
+    sum_var = 0
+    arr.each do |items|
+        items.each { |item| sum_var += item }
+    end
+    sum_var
+end
+
+array_1 = [
+  [4, 5],
+  [1, 3, 7, 1]
+]
+puts two_d_sum(array_1)    # => 21
+
+array_2 = [
+  [3, 3],
+  [2],
+  [2, 5]
+]
+puts two_d_sum(array_2)    # => 15
+
+# Write a method two_d_translate that takes in a 2 dimensional array and translates it into a 1 dimensional array. You can assume that the inner arrays always have 2 elements. See the examples.
+
+# create var to hold eles
+# iterate thru outter arr.
+# iterate x amount of time of the last element in the intter array and add these eles to new var
+# return var eles
+
+def two_d_translate(arr)
+    elements = []
+    arr.each do | inner_arr |
+        inner_arr[1].times { |i| elements << inner_arr[0] }
+    end
+    elements
+end
+
+arr_1 = [
+  ['boot', 3],
+  ['camp', 2],
+  ['program', 0]
+]
+
+print two_d_translate(arr_1) # => [ 'boot', 'boot', 'boot', 'camp', 'camp' ]
+puts
+
+arr_2 = [
+  ['red', 1],
+  ['blue', 4]
+]
+
+print two_d_translate(arr_2) # => [ 'red', 'blue', 'blue', 'blue', 'blue' ]
+puts
+
+# Write a method array_translate that takes in an array whose elements alternate between words and numbers. The method should return a string where each word is repeated the number of times that immediately follows in the array.
+# create var to hold data
+# iterate thru outter arr
+# iterate thru inner arr
+# compare index and if is not higher than current index, add as multiple times as possible
+# return var with data
+
+def array_translate(array)
+    arr_sent = ""
+    array.each_with_index do | current_ele, current_idx |
+        array[current_idx + 1].times { |i| arr_sent += current_ele } if current_idx % 2 == 0
+    end
+    arr_sent
+end
+
+print array_translate(["Cat", 2, "Dog", 3, "Mouse", 1]); # => "CatCatDogDogDogMouse"
+puts
+
+print array_translate(["red", 3, "blue", 1]); # => "redredredblue"
+puts
+
+# Pig latin translation uses the following rules:
+# - for words that start with a vowel, add 'yay' to the end
+# - for words that start with a nonvowel, move all letters before the first vowel to the end of the word and add 'ay'
+
+# - create a vowels string
+# - check if first character of word is in the vowels string.
+# - if it is, add yay to the word and return it.
+# - if is not, send word to method to get vowels remove.
+# - add yay to returned string and return.
+
+
+
+def pig_latin_word(word)
+
+    vowels = "aeiou"
+    if vowels.include?(word[0])
+        return word += "yay"
+    else
+        return remove_vowels_until_vowel(word) + "ay"
+    end
+
+end
+
+# Loop thru characters
+# when a vowel is found, return range of word 
+def remove_vowels_until_vowel(word)
+    vowels = "aeiou"
+    word.each_char.with_index do | char, idx |
+        return word[idx..-1] if vowels.include?(char)
+    end
+end
+
+puts pig_latin_word("apple")   # => "appleyay"
+puts pig_latin_word("eat")     # => "eatyay"
+puts pig_latin_word("banana")  # => "ananabay"
+puts pig_latin_word("trash")   # => "ashtray"
