@@ -62,14 +62,29 @@ puts new_new_hash
 
 # Inject/Reduce
 
-puts [11, 7, 2, 4].inject { |acc, ele| acc + ele }
-# get max using inject
-arr_so = [10,22,11,98,45,-40]
+# puts [11, 7, 2, 4].inject { |acc, ele| acc + ele }
+# # get max using inject
+# arr_so = [10,22,11,98,45,-40]
 
-p [11, 7, 2, 4].inject do |acc, el|
-    if el < acc
-        el
-    else
-        acc
-    end
+# p [11, 7, 2, 4].inject do |acc, el|
+#     if el < acc
+#         el
+#     else
+#         acc
+#     end
+# end
+
+# Global variables
+
+$message = "Hello"
+
+def say_message
+    puts $message
 end
+
+say_message
+
+# Constants
+
+FOOD = "pho"
+puts FOOD
