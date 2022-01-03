@@ -89,3 +89,13 @@ say_message
 
 FOOD = "pho"
 puts FOOD
+
+# Blocks
+
+[1,2,3].map { |el| -(num * 2)}
+
+# Using methods with blocks
+
+["a","b","c"].map { |str| str.upcase }
+["a","b","c"].map(&:upcase)
+[1,2,3].select(&:odd?)
