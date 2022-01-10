@@ -153,3 +153,136 @@ new_add_sum_proc(1,2,&new_doubler) # 6
 
 newest_dobler = Proc.new { |num| num * 2 }
 p [1,2,3,4,5].map(&newest_dobler) # [2,4,6,8,10]
+
+# Classes
+
+class Cat
+
+    #class variable
+    @@legs = 4
+
+    def initialize(name, color, age)
+        #instance variable
+        @name = name
+        @color = color
+        @age = age
+    end
+
+    def get_name
+        @name
+    end
+
+    def name=(name)
+        @name = name
+    end
+
+    def get_color
+        @color
+    end
+
+    def color=(color)
+        @color = color
+    end
+
+    def get_age
+        @age
+    end
+
+    def age=(age)
+        @age = age
+    end
+
+end
+
+cat_1 = Cat.new("Whiskers","White",5)
+
+p cat_1.get_name
+
+class Car
+
+    #Class variable
+    @@num_of_wheels = 4
+
+    #Class constant. Cannot be changed!!!
+    NUM_OF_DOORS = 4
+
+    #Class method
+    def self.upgrade_to_flying_cars
+        @@num_of_wheels = 0
+    end
+
+    def initialize(color)
+        #Instance variable
+        @color = color
+    end
+
+    def num_wheels
+        @@num_of_wheels
+    end
+
+    def get_doors_quantity
+        NUM_OF_DOORS
+    end
+end
+
+car_1 = Car.new("Red")
+car_2 = Car.new("Black")
+
+p car_1.num_wheels # 4
+p car_2.num_wheels #4
+
+Car.upgrade_to_flying_cars
+
+p car_1.num_wheels #0
+
+car_3 = Car.new("Blue")
+p car_3.num_wheels # 0  the previous call to class method flying card changes each new class
+p car_3.get_doors_quantity # 4
+
+# Notation
+# Instance method - Dog#speak
+ # Class method - Dog::growl
+
+ class Dog
+
+    def initialize(name, bark)
+        #instance variables
+        @name = name
+        @bark = bark
+    end
+
+    # Class method
+    def self.growl
+        "GRRRRR"
+    end
+
+    # Class method
+
+    def self.whos_louder(dog_1, dog_2)
+        return dog_1 if dog_1.bark.length > dog_2.bark.length
+        dog_2
+    end
+
+    #instance methods
+    def speak 
+        @name + " says " + @bark
+    end
+
+    def name
+        @name
+    end
+
+    def bark
+        @bark
+    end
+ end
+
+ my_dog = Dog.new("Fido", "woof")
+ puts my_dog.speak # Fido says woof
+
+ other_dog = Dog.new("Doge", "much bork")
+ puts other_dog.speak # Doge says much bork
+
+ p Dog.growl # "Grrr"
+
+ puts Dog.whos_louder(my_dog, other_dog) == other_dog #true
