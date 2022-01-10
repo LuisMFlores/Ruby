@@ -1,28 +1,32 @@
-require "byebug"
-
-def select_even_nums(num_arr)
-    num_arr.select(&:even?)
+def my_map(arr, &prc)
+    new_arr = []
+    arr.each { |el| new_arr << prc.call(el)}
+    new_arr
 end
 
-def reject_puppies(arr)
-    arr.reject { |h| h["age"] < 3 }
+def my_select(arr, &prc)
+    new_arr = []
+    arr.each { |el| new_arr << el if prc.call(el) }
+    new_arr
 end
 
-def count_positive_subarrays(two_d_array)
-    two_d_array.count { |arr_el| arr_el.sum > 0}
+def my_count(arr, &prc)
+    count = 0
+    arr.each { |el| count += 1 if prc.call(el)}
+    count
 end
 
-$vowels = "aeiou"
-
-def aba_translate(str)
-    str.each_char.inject("") { |acc, el| acc += transform_char(el) }
+def my_any?(arr, &prc)
+    arr.each { |el| return true if prc.call(el)}
+    false
 end
 
-def transform_char(char)
-    return char + "b" + char if $vowels.include?(char)
-    char
+def my_all?(arr, &prc)
+    arr.each { |el| return false if !prc.call(el) }
+    true
 end
 
-def aba_array(arr)
-    arr.map { |el| aba_translate(el) }
+def my_none?(arr, &prc)
+    arr.each { |el| return false if prc.call(el) }
+    true
 end
