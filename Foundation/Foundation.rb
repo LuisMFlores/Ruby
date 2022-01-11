@@ -286,3 +286,42 @@ p car_3.get_doors_quantity # 4
  p Dog.growl # "Grrr"
 
  puts Dog.whos_louder(my_dog, other_dog) == other_dog #true
+
+ # Monkey patching
+
+ class String
+
+    def upcase?
+        self == self.upcase
+    end
+
+ end
+
+  p "HELLO".upcase? # true
+ p "hello".upcase? #false
+
+ class Integer
+    def prime?
+        return true if self < 2
+        (2...self).each { |num| return false if self % num == 0 }
+        true
+    end
+ end
+
+ p 10.prime? #false
+ p 7.prime? #true
+
+ class Array
+    def has_zero?
+        self.each { |el| return true if el == 0 }
+        false
+    end
+
+    # def has_zero?
+    #     sef.include?(0)
+    # end
+    
+ end
+
+ p [0,1,2,3].has_zero? #true
+ p [5,3,9].has_zero? #false
