@@ -62,7 +62,6 @@ class Hangman
   end
 
   def win?
-    debugger
     if @guess_word.join == @secret_word
       print("WIN")
       return true
