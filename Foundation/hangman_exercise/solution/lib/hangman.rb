@@ -1,5 +1,3 @@
-require "byebug"
-
 class Hangman
   DICTIONARY = ["cat", "dog", "bootcamp", "pizza"]
 
@@ -32,58 +30,66 @@ class Hangman
 
   def get_matching_indices(char)
     indices = []
-    @secret_word.each_char.with_index {|el, idx| indices << idx if el == char }
+
+    @secret_word.each_char.with_index do |curr_char, i|
+      indices << i if curr_char == char
+    end
+
     indices
   end
 
   def fill_indices(char, indices)
-    indices.each { |idx| @guess_word[idx] = char }
+    indices.each { |index| @guess_word[index] = char }
   end
 
   def try_guess(char)
-    if already_attempted?(char)
-      print("that has already been attempted")
+    if self.already_attempted?(char)
+      puts "that char has already been guessed"
       return false
-    else
-      @attempted_chars << char
-    indices = get_matching_indices(char)
-    if indices.empty?
-        @remaining_incorrect_guesses -= 1
-      else
-        fill_indices(char, indices)
-      end
-      return true
     end
+
+    @attempted_chars << char
+
+    matching_indices = self.get_matching_indices(char)
+    if matching_indices.empty?
+      @remaining_incorrect_guesses -= 1
+    else
+      self.fill_indices(char, matching_indices)
+    end
+
+    true
   end
 
   def ask_user_for_guess
-    print "Enter a char: "
-    try_guess(gets.chomp)
+    print "Enter a char:"
+    char = gets.chomp
+    self.try_guess(char)
   end
 
   def win?
-    debugger
-    if @guess_word.join == @secret_word
-      print("WIN")
+    if @secret_word == @guess_word.join("")
+      puts "YOU WIN"
       return true
+    else
+      return false
     end
-    false
   end
 
   def lose?
     if @remaining_incorrect_guesses == 0
-      print "LOSE"
+      puts "YOU LOSE"
       return true
+    else
+      return false
     end
-    false
   end
 
   def game_over?
     if win? || lose?
-      print(@secret_word)
+      puts "The word was " + @secret_word
       return true
+    else
+      return false
     end
-    false
   end
-
 end
