@@ -331,3 +331,36 @@ p car_3.get_doors_quantity # 4
 puts "Whats your name?"
 name = gets.chomp
 p "Hello" + " " + name
+
+# attr_reader
+
+class Dog
+
+    # attr_reader will define #name and #age getters for us
+    attr_reader :name, :age
+
+    # attr_writer will define #name= and @age= setter for us
+    attr_writer :name, :age
+
+    # Will define both a getter and setter
+    # attr_accessor :name, :age
+
+    def initialize(name, age, favorite_food)
+        @name = name
+        @age = age
+        @favorite_food
+    end
+
+end
+
+dog = Dog.new("Fido", 3, "Pizza")
+puts dog.name #"Fido"
+puts dog.age #3
+# puts dog.favorite_food would give error
+
+
+dog.name = "Luis"
+dog.age = 5
+
+puts dog.name #"Luis"
+puts dog.age #5
