@@ -364,3 +364,31 @@ dog.age = 5
 
 puts dog.name #"Luis"
 puts dog.age #5
+
+# Recursion
+
+def count_down(num)
+    if num == 0
+        puts "Houston, we have lift-off"
+        return
+    end
+    puts num
+    count_down(num - 1)
+end
+
+count_down(10)
+
+
+def factorial(n)
+    return 1 if n == 1
+    n * factorial(n - 1)
+end
+
+puts factorial(5) #120
+
+def fib(n)
+    return 1 if n < 3
+    fib(n - 1) + fib(n - 2)
+end
+
+puts fib(5) #5
