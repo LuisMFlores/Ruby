@@ -392,3 +392,49 @@ def fib(n)
 end
 
 puts fib(5) #5
+
+#Spaceship
+
+puts 7<=>2 #1
+puts 7<=>7 #0
+puts 2<=>7 #-1
+
+# OR operator ||
+
+puts true || 42 #true
+puts false || 50 #50
+puts nil || "Hello" #Hello
+puts "Hi" || "Hello"#Hi
+
+def greet(person)
+    person ||= "User"
+    puts "Hello #{person}"
+end
+
+greet("Luis") #"Luis"
+greet(nil) #user
+
+def call_that_proc(&prc)
+    prc ||= Proc.new { |data| data.upcase + "!!!"}
+    puts prc.call("Hello")
+end
+
+call_that_proc #"HELLO!!!
+
+# Lazy initialization
+
+class Restaurant
+
+    attr_reader :name, :chefs
+
+    def initialize(name, chefs)
+        @name = name
+        @chefs = chefs
+    end
+
+    #Lazy initialization
+    def menu
+        @menu ||= ["sammies", "big ol cookies", "bean blankies", "chicky catch"]
+    end
+
+end
