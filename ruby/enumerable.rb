@@ -194,5 +194,5 @@ end
 
 if __FILE__ == $PROGRAM_NAME
     debugger
-  puts primes(100)
+    puts primes(100)
 end
