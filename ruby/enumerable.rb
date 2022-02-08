@@ -191,3 +191,8 @@ end
 
 [ "a", "b", "c" ].my_reverse   #=> ["c", "b", "a"]
 [ 1 ].my_reverse               #=> [1]
+
+if __FILE__ == $PROGRAM_NAME
+    debugger
+  puts primes(100)
+end
