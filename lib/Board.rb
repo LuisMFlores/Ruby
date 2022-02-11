@@ -14,6 +14,10 @@ class Board
         render_grid
     end
 
+    def []=(pos, v)
+        grid[pos.first][pos.last] = v
+    end
+
     private
 
     def loop_thru_grid(&prc)
@@ -30,7 +34,7 @@ class Board
         shuffle_letters = (ALPHABET.sample((playeable_size * playeable_size) / 2) * 2).shuffle
         loop_thru_grid do |row, col|
             next if row == 0 || col == 0
-            grid[row][col] = shuffle_letters.pop
+            self[[row,col]] = shuffle_letters.pop
         end
     end
 
@@ -48,15 +52,15 @@ class Board
         length = grid.length
         loop_thru_grid do |row,col|
             if row == 0 && col == 0
-                grid[row][col] = " "
+                self[[row,col]] = " "
             elsif row == 0
-                grid[row][col] = col
+                self[[row,col]] = col
             elsif col == 0
-                grid[row][col] = row
+                self[[row,col]] = row
             end
         end
     end
 
 end
 
-board = Board.new(5)
+board = Board.new
