@@ -1,66 +1,52 @@
-require "byebug"
+require_relative "Card.rb"
 
 class Board
 
     ALPHABET = ("a".."z").to_a
 
-    attr_reader :grid
+    attr_reader :cards, :grid
 
-    def initialize(size = 5)
-        raise "Unable to create a board bigger than #{ALPHABET.count * 2}" unless !(size * size > ALPHABET.count * 2) || !size.even?
-        @grid = Array.new(size) { Array.new(size) { "" } }
-        draw_labels
-        populate(size)
-        render_grid
+    def initialize
+        @grid = Array.new(5) { Array.new(5) }
+        populate
+        render
     end
 
-    def []=(pos, v)
-        grid[pos.first][pos.last] = v
+       def render
+        length = @grid.length
+        (0...length).each do |out_idx|
+            (0...length).each do |in_idx|
+                el = grid[out_idx][in_idx]
+                if el.kind_of?(Card)
+                    print(" #{el.to_s}")
+                else
+                    print(" #{el}")
+                end
+            end
+            puts
+        end
     end
 
     private
 
-    def loop_thru_grid(&prc)
-        length = grid.length
-        (0...length).each do |row|
-            (0...length).each do |col|
-                prc.call(row,col)
+    def populate
+        sample = ALPHABET.sample(8) * 2
+        shuffle_sample = sample.shuffle
+
+        length = @grid.length
+        (0...length).each do |outter_idx|
+            (0...length).each do |inner_idx|
+                if outter_idx == 0 && inner_idx == 0
+                    grid[outter_idx][inner_idx] = " " 
+                elsif outter_idx == 0
+                     grid[outter_idx][inner_idx] = inner_idx
+                elsif inner_idx == 0
+                    grid[outter_idx][inner_idx] = outter_idx
+                else
+                    grid[outter_idx][inner_idx] = Card.new(shuffle_sample.pop)
+                end
             end
         end
     end
-
-    def populate(size)
-        playeable_size = size - 1
-        shuffle_letters = (ALPHABET.sample((playeable_size * playeable_size) / 2) * 2).shuffle
-        loop_thru_grid do |row, col|
-            next if row == 0 || col == 0
-            self[[row,col]] = shuffle_letters.pop
-        end
-    end
-
-    def render_grid
-        length = grid.length
-        (0...length).each do |row|
-            (0...length).each do |col|
-                print(grid[row][col].to_s + " ")
-            end
-            puts " "
-        end
-    end
-
-    def draw_labels
-        length = grid.length
-        loop_thru_grid do |row,col|
-            if row == 0 && col == 0
-                self[[row,col]] = " "
-            elsif row == 0
-                self[[row,col]] = col
-            elsif col == 0
-                self[[row,col]] = row
-            end
-        end
-    end
-
+    
 end
-
-board = Board.new
