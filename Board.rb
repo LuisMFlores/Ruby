@@ -1,52 +1,56 @@
-require_relative "Card.rb"
+require_relative "Card"
+require "byebug"
 
 class Board
 
     ALPHABET = ("a".."z").to_a
 
-    attr_reader :cards, :grid
+    attr_reader :cards
 
-    def initialize
-        @grid = Array.new(5) { Array.new(5) }
-        populate
+    def initialize(grid_size = 4)
+        populate(grid_size)
         render
     end
 
-       def render
-        length = @grid.length
-        (0...length).each do |out_idx|
-            (0...length).each do |in_idx|
-                el = grid[out_idx][in_idx]
-                if el.kind_of?(Card)
-                    print(" #{el.to_s}")
-                else
-                    print(" #{el}")
+    def render
+        grid_length = cards.length + 1
+        (0...grid_length).each do |outter_idx|
+            (0...grid_length).each do |inner_idx|
+                v = " "
+                if outter_idx == 0
+                    v += inner_idx.to_s
+                elsif inner_idx == 0
+                    v += outter_idx.to_s
+                elsif
+                    v += @cards[outter_idx - 1][inner_idx - 1].to_s
                 end
+                print v
             end
             puts
         end
     end
 
+    def [](pos)
+        col, row = pos
+        cards[col - 1][row - 1]
+    end
+
     private
 
-    def populate
-        sample = ALPHABET.sample(8) * 2
-        shuffle_sample = sample.shuffle
+    def populate(grid_length)
+        original_card_num = grid_length * 2
+        sample = (ALPHABET.sample(original_card_num) * 2).shuffle
+        grid_length = original_card_num / 2
+        @cards = []
 
-        length = @grid.length
-        (0...length).each do |outter_idx|
-            (0...length).each do |inner_idx|
-                if outter_idx == 0 && inner_idx == 0
-                    grid[outter_idx][inner_idx] = " " 
-                elsif outter_idx == 0
-                     grid[outter_idx][inner_idx] = inner_idx
-                elsif inner_idx == 0
-                    grid[outter_idx][inner_idx] = outter_idx
-                else
-                    grid[outter_idx][inner_idx] = Card.new(shuffle_sample.pop)
-                end
+        grid_length.times do |v|
+            temp_cards = []
+            grid_length.times do |in_v|
+                temp_cards << Card.new(sample.pop)
             end
+            cards << temp_cards
         end
+        
     end
     
 end

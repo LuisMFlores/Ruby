@@ -1,3 +1,5 @@
+require "byebug"
+
 class Card
 
     attr_reader :value, :hidden
@@ -13,7 +15,7 @@ class Card
     end
 
     def reveal
-        hidden = false
+        @hidden = false
     end
 
     def ==(card)
