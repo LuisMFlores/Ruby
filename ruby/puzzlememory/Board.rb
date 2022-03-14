@@ -5,14 +5,15 @@ class Board
 
     ALPHABET = ("a".."z").to_a
 
-    attr_reader :cards
+    attr_reader :cards, :grid_size
 
     def initialize(grid_size = 4)
-        populate(grid_size)
-        render
+        @grid_size = grid_size
+        populate
     end
 
     def render
+        puts
         grid_length = cards.length + 1
         (0...grid_length).each do |outter_idx|
             (0...grid_length).each do |inner_idx|
@@ -32,13 +33,23 @@ class Board
 
     def [](pos)
         col, row = pos
-        cards[col - 1][row - 1]
+        cards[col.to_i - 1][row.to_i - 1]
+    end
+
+        def reveal(pos)
+         self[pos].reveal
+         system("clear")
+         render
+    end
+
+    def hide(*pos)
+        pos.each { |el| self[el].flip }
     end
 
     private
 
-    def populate(grid_length)
-        original_card_num = grid_length * 2
+    def populate
+        original_card_num = grid_size * 2
         sample = (ALPHABET.sample(original_card_num) * 2).shuffle
         grid_length = original_card_num / 2
         @cards = []
@@ -52,5 +63,7 @@ class Board
         end
         
     end
+
+
     
 end

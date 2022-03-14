@@ -15,11 +15,19 @@ class Card
     end
 
     def reveal
-        @hidden = false
+        flip
     end
 
     def ==(card)
         card.value == value
+    end
+
+    def flip
+        if @hidden
+            @hidden = false
+            return
+        end
+        @hidden = true
     end
 
 end
