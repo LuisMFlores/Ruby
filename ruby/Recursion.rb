@@ -115,3 +115,71 @@ end
   puts reverse("q") # => "q"
   puts reverse("id") # => "di"
   puts reverse("") # => ""
+
+  # Recursion exercise
+
+  # Warmup
+
+# Write a recursive method, range, that takes a start and an end and returns an array of all numbers in that range, exclusive. For example, range(1, 5) should return [1, 2, 3, 4]. If end < start, you can return an empty array.
+# Write both a recursive and iterative version of sum of an array.
+
+def range(start_num, end_num)
+  return [] if end_num < start_num
+  [start_num] + range(start_num + 1, end_num)
+end
+
+def exponation(b, p)
+  p == 0 ? 1 : b * exponation(b, p - 1)
+end
+
+class Array
+  def deep_dup
+    dup_arr = []
+    self.each { |el| dup_arr << el.is_a?(Array) ? el.deep_dup : el }
+    dup_arr
+  end
+end
+
+def fibonacci(n)
+  return [0,1].take(n) if n < 3
+  fibs = fibonacci(n - 1)
+  fibs << fibs[-2] + fibs[-1]
+end
+
+def bsearch(arr, target)
+  return nil if arr.empty?
+
+  mid_idx = arr.length / 2
+
+  case target <=> arr[mid_idx]
+  when -1
+    bsearch(arr.take(mid_idx), target)
+  when 0
+    mid_idx
+  when 1
+    subs = bsearch(arr.drop(mid_idx + 1), target)
+    subs.nil? ? nil : mid_idx + subs + 1
+  end
+
+end
+
+
+class Array
+
+  def merge_sort
+
+  end
+
+  def merge(left, right)
+    merged_arr = []
+
+    until left.empty? || right.empty?
+      puts left.first
+      puts right.first
+      merged_arr << (left.first < right.first) ? left.shift : right.shift
+    end
+
+    merged_arr + left + right
+  end
+
+end
