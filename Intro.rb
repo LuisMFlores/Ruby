@@ -46,3 +46,65 @@ puts "coding".length # 6
 puts "coding"[2] # g
 puts "Hey" + "Programmers" # HeyProgrammers
 puts "Hey-Programmers".length < 5 # false
+
+# Variables
+
+my_num = 42
+my_num + 4
+puts my_num # 42
+
+count = 10
+count += 1
+puts count # 11
+
+count *= 5
+puts count # 55
+
+first_name = "Luis"
+last_name = "Flores"
+full_name = first_name + " " + last_name
+puts full_name # "Luis Flores"
+
+sentence = "There is no spoon"
+puts "---1:"
+puts sentence + "?"   # There is not spoon?
+
+puts "---2:"
+puts sentence         # There is no spoon
+
+sentence += "."
+puts "---3:"
+puts sentence         # There is no spoon.
+
+num = 6 / 2
+puts "---4:"
+puts num              # 3
+
+puts "---5:"
+puts sentence[num]    # r
+
+num = 40
+num + 5
+puts "---1:"
+puts num                   # 40
+
+num += 2
+puts "---2:"
+puts num                   # 42
+
+isEven = num % 2 == 0
+puts "---3:"
+puts isEven                # true
+
+isNegative = num < 0
+puts "---4:"
+puts isNegative            # false
+
+puts "---5:"
+puts isEven || isNegative  # true
+
+puts "---6:"
+puts isEven && isNegative  # false
+
+puts "---7:"
+puts isEven && !isNegative # true
