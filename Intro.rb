@@ -34,3 +34,15 @@ puts 13 % 2 == 0 # false
 puts 6 > 0 && 6 % 2 == 0 # true
 puts true && false # false
 puts !false || false # true
+
+# String data type
+
+puts "Hello" # Hello
+puts "Hello" + " " + "World" # Hello World - Concatenation
+puts "Hello".length # 5
+puts "Hello"[0] # H
+
+puts "coding".length # 6
+puts "coding"[2] # g
+puts "Hey" + "Programmers" # HeyProgrammers
+puts "Hey-Programmers".length < 5 # false
