@@ -1,4 +1,4 @@
-# Numbers
+# Numbers data type
 
 puts 10 / 3 # 3
 puts 27 % 6 # 3
@@ -23,3 +23,14 @@ puts 5 > 2 # true
 puts 5 < 1 # false
 puts 5 >= 6 # false
 puts 6 <= 5 # false
+
+# Booleans data type
+
+# ! (Not)
+# && (And)
+# || (Or)
+
+puts 13 % 2 == 0 # false
+puts 6 > 0 && 6 % 2 == 0 # true
+puts true && false # false
+puts !false || false # true
