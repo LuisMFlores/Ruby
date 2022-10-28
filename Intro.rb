@@ -155,3 +155,77 @@ end
 puts goodbye("Daniel")   # => "Bye Daniel."
 puts goodbye("Mark")     # => "Bye Mark."
 puts goodbye("Beyonce")  # => "Bye Beyonce."
+
+# Conditional statement
+
+def is_div_by_5(num)
+    num % 5 == 0
+end
+
+puts is_div_by_5(10) # => true
+puts is_div_by_5(40) # => true
+puts is_div_by_5(42) # => false
+puts is_div_by_5(8)  # => false
+
+def either_only(num)
+    if divisable_by(num, 3) && divisable_by(num, 5)
+        return false
+    elsif divisable_by(num, 3) || divisable_by(num, 5)
+        return true
+    else
+        false
+    end
+end
+
+def divisable_by(num, divisable)
+    num % divisable == 0
+end
+
+puts either_only(9)  # => true
+puts either_only(20) # => true
+puts either_only(7)  # => false
+puts either_only(15) # => false
+puts either_only(30) # => false
+
+def larger_number(num1, num2)
+    num1 > num2 ? num1 : num2
+end
+
+puts larger_number(42, 28)   # => 42
+puts larger_number(99, 100)  # => 100
+
+def longer_string(str1, str2)
+    str1.length > str2.length ? str1 : str2
+end
+
+puts longer_string("app", "academy") # => "academy"
+puts longer_string("summer", "fall") # => "summer"
+puts longer_string("hello", "world") # => "hello"
+
+def number_check(num)
+    if num < 0
+        "negative"
+    elsif  num > 0
+        "positive"
+    else
+        "zero"
+    end
+end
+
+puts number_check(5)    # => "positive"
+puts number_check(-2)   # => "negative"
+puts number_check(0)    # => "zero"
+
+def word_check(word)
+    if word.length > 6
+        "long"
+    elsif word.length < 6
+        "short"
+    else
+        "medium"
+    end
+end
+
+puts word_check("contraption") # => "long"
+puts word_check("fruit")       # => "short"
+puts word_check("puzzle")      # => "medium"
