@@ -108,3 +108,50 @@ puts isEven && isNegative  # false
 
 puts "---7:"
 puts isEven && !isNegative # true
+
+# Methods
+
+def say_welcome_message
+    puts "Hello"
+end
+
+puts "Before method call"
+say_welcome_message # "Hello"
+puts "After method call"
+
+# Parameters
+
+def say_hello(person)
+    puts "Hello " + person + "!"
+end
+
+say_hello("Luis") # Hello Luis!
+
+# Methods return
+
+def sum(num_1, num_2)
+    num_1 + num_2
+end
+
+puts sum(1,1) # 1
+
+# Method exercise
+
+def average_of_three(num_1, num_2, num_3)
+    sum = num_1 + num_2 + num_3
+    sum / 3.0
+
+end
+
+puts average_of_three(5,3,10) # 6.0
+puts average_of_three(3, 7, 8)   # => 6.0
+puts average_of_three(2, 5, 17)  # => 8.0
+puts average_of_three(2, 8, 1)  #3.666...
+
+def goodbye(name)
+    "Good bye" + " " + name + "."
+end
+
+puts goodbye("Daniel")   # => "Bye Daniel."
+puts goodbye("Mark")     # => "Bye Mark."
+puts goodbye("Beyonce")  # => "Bye Beyonce."
