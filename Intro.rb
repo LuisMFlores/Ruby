@@ -229,3 +229,145 @@ end
 puts word_check("contraption") # => "long"
 puts word_check("fruit")       # => "short"
 puts word_check("puzzle")      # => "medium"
+
+# Loops
+
+def repeatHello
+
+    counter = 1
+    while counter < 10
+        puts "Hello"
+        counter += 1
+    end
+
+end
+
+repeatHello # repeats "hello" x 9
+
+def repeat(word, num = 1)
+    counter = 1
+    puts "---- Before loop ----"
+
+    while counter <= num
+        puts word
+        counter += 1
+    end
+
+    puts "---- After loop ----"
+end
+
+repeat("Luima", 15)
+
+def print_numbers(num)
+    counter = 1
+    while counter < num
+        puts counter
+        counter += 1
+    end
+end
+
+print_numbers(100)
+
+def count_e(word)
+    counter = 0
+    e_count = 0
+    while counter < word.length
+        e_count += 1 if word[counter] == "e"
+        counter += 1
+    end
+    e_count
+end
+
+puts count_e("movie") # => 1
+puts count_e("excellent") # => 3
+
+def count_a(word)
+    counter = 0
+    a_counter = 0
+
+    while counter < word.length
+        a_counter += 1 if word[counter].downcase == "a"
+        counter += 1
+    end
+
+    a_counter
+end
+
+puts count_a("application")  # => 2
+puts count_a("bike")         # => 0
+puts count_a("Arthur")       # => 1
+puts count_a("Aardvark")     # => 3
+
+
+
+def count_vowels(word)
+    vowels = "aeiou"
+    counter = 0
+    vowel_counter = 0
+
+    while counter < word.length
+        vowel_counter += 1 if vowels.include?(word[counter])
+        counter += 1
+    end
+
+    vowel_counter
+end
+
+puts count_vowels("bootcamp")  # => 3
+puts count_vowels("apple")     # => 2
+puts count_vowels("pizza")     # => 2
+
+def sum_nums(max)
+    i = 0
+    count = 0
+
+    while i <= max
+        count += i
+        i += 1 
+    end
+
+    count
+end
+
+puts sum_nums(4) # => 10, because 1 + 2 + 3 + 4 = 10
+puts sum_nums(5) # => 15
+
+def factorial(num)
+
+    i = 1
+    fac = 1
+
+
+    while i <= num
+        fac *= i
+        i += 1
+    end
+
+    fac
+end
+
+puts factorial(3) # => 6, because 1 * 2 * 3 = 6
+puts factorial(5) # => 120, because 1 * 2 * 3 * 4 * 5 = 120
+
+def reverse(word)
+    i = word.length - 1
+    reversed_word = ""
+
+    while i >= 0
+        reversed_word += word[i]
+        i -= 1
+    end
+    reversed_word
+end
+
+puts reverse("cat")          # => "tac"
+puts reverse("programming")  # => "gnimmargorp"
+puts reverse("bootcamp")     # => "pmactoob"
+
+def is_palindrome(word)
+    reverse(word) == word
+end
+
+puts is_palindrome("racecar")  # => true
+puts is_palindrome("kayak")    # => true
+puts is_palindrome("bootcamp") # => false
