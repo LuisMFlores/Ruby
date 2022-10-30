@@ -589,3 +589,24 @@ end
 print fizz_buzz(20) # => [4, 6, 8, 16, 18]
 puts
 print fizz_buzz(15) # => [4, 6, 8]
+
+# Arrays methods
+
+names_arr_2 = ["Luis", "Merlin"]
+puts names_arr_2
+names_arr_2 << "Jean" # shovels one element to the end. Evaluates to arr itself
+puts names_arr_2
+names_arr_2.push("Mami") # adds elements to end of arr Evaluates to arr itself
+puts names_arr_2
+names_arr_2.pop # removes last element. Evaluates to the element itself
+puts names_arr_2
+
+names_arr_2.unshift("Papi") #Adds element to fron of the array. Evaluates to the arr itself
+puts names_arr_2
+names_arr_2.shift # Removes the first element of the array. Evaluates to the removed element.
+
+puts names_arr_2.index("Merlin") # 1
+p names_arr_2.index("mami") # nil
+
+puts names_arr_2.include?("Luis") # true
+puts names_arr_2.include?("tito") # false
