@@ -637,3 +637,173 @@ print str_yellow.split(" ")
 how_are_you_arr = ["How", "are", "you"]
 puts
 puts how_are_you_arr.join(" ")
+
+# Enumerables methods
+
+months = ["JAN", "FEB", "MAR", "APR"]
+
+months.each  { |month| puts month }
+
+months.each do |month|
+    puts month
+    puts "---"
+end
+
+months.each_with_index do |month, idx|
+    puts "#{idx + 1} - #{month}"
+end
+
+sentence_hello_word = "Hello World"
+
+sentence_hello_word.each_char do |char|
+    print char
+end
+
+puts
+
+sentence_hello_word.each_char.with_index do | char, idx|
+    print puts "#{idx + 1} - #{char}"
+end
+
+# Ranges enumerable
+
+def fizBuzz(max)
+    arr = []
+    (0..max).each { |ele| arr << ele if ele.even? }
+    arr
+end
+
+p fizBuzz(100)
+
+4.times { puts "hi" }
+
+def to_initials(name)
+    words = name.split(" ")
+    initials = ""
+
+    words.each { |word| initials += word[0] }
+
+    initials
+end
+
+# Bad code because a lot going on but still fun to try new things
+def private_to_initials(name)
+    name.split(" ").reduce("") { |acc, word| acc += word[0] }
+end
+
+puts to_initials("Kelvin Bridges")      # => "KB"
+puts to_initials("Michaela Yamamoto")   # => "MY"
+puts to_initials("Mary La Grange")      # => "MLG"
+
+def first_in_array(arr, el1, el2)
+    arr.each { |ele| return ele if ele == el1 || ele == el2 }
+end
+
+puts first_in_array(["a", "b", "c", "d"], "d", "b"); # => "b"
+puts first_in_array(["cat", "bird" ,"dog", "mouse" ], "dog", "mouse"); # => "dog"
+
+def abbreviate_sentence(sent)
+    words = sent.split(" ")
+    new_sent = []
+
+    words.each do |word|
+        new_sent << (word.length > 4 ? private_remove_vowels(word) : word)
+    end
+
+    new_sent.join(" ")
+end
+
+$vowels = "aeiou"
+
+def private_remove_vowels(word)
+    word.split("").select { |ele| !$vowels.include?(ele) }.join("")
+end
+
+puts abbreviate_sentence("follow the yellow brick road") # => "fllw the yllw brck road"
+puts abbreviate_sentence("what a wonderful life")        # => "what a wndrfl life"
+
+# Hint: use str.upcase and str.downcase
+# "abc".upcase # => "ABC"
+
+def format_name(str)
+    formatted_str = []
+
+    str.split(" ").each { |part| formatted_str << part[0].upcase + part[1..-1].downcase }
+
+    formatted_str.join(" ")
+end
+
+puts format_name("chase WILSON") # => "Chase Wilson"
+puts format_name("brian CrAwFoRd scoTT") # => "Brian Crawford Scott"
+
+# A name is valid is if satisfies all of the following:
+# - contains at least a first name and last name, separated by spaces
+# - each part of the name should be capitalized
+#
+# Hint: use str.upcase or str.downcase
+# "a".upcase # => "A"
+
+def is_valid_name(str)
+    str_parts = str.split(" ")
+    return false if str_parts.length < 2
+
+    str_parts.each do |ele|
+        return false if format_name(ele) != ele
+    end
+
+    true
+end
+
+puts is_valid_name("Kush Patel")       # => true
+puts is_valid_name("Daniel")           # => false
+puts is_valid_name("Robert Downey Jr") # => true
+puts is_valid_name("ROBERT DOWNEY JR") # => false
+
+# For simplicity, we'll consider an email valid when it satisfies all of the following:
+# - contains exactly one @ symbol
+# - contains only lowercase alphabetic letters before the @
+# - contains exactly one . after the @
+
+$alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+def is_valid_email(str)
+    parts = str.split("@")
+    
+    return false if parts.length != 2
+    return false if parts[0].downcase != parts[0]
+    parts[0].each_char { |char| return false if !$alphabet.include?(char) }
+
+    return false if parts[1].split(".").length != 2
+
+    true
+
+end
+
+puts is_valid_email("abc@xy.z")         # => true
+puts is_valid_email("jdoe@gmail.com")   # => true
+puts is_valid_email("jdoe@g@mail.com")  # => false
+puts is_valid_email("jdoe42@gmail.com") # => false
+puts is_valid_email("jdoegmail.com")    # => false
+puts is_valid_email("az@email")         # => false
+
+def reverse_words(sent)
+    reversed_words_arr = []
+    sent.split(" ").each { |word| reversed_words_arr << word.reverse }
+    reversed_words_arr.join(" ")
+end
+
+puts reverse_words('keep coding') # => 'peek gnidoc'
+puts reverse_words('simplicity is prerequisite for reliability') # => 'yticilpmis si etisiuqererp rof ytilibailer'
+
+def rotate_array(arr, num)
+    num.times do 
+        arr.unshift(arr.pop)
+    end
+    arr
+end
+
+print rotate_array([ "Matt", "Danny", "Mashu", "Matthias" ], 1) # => [ "Matthias", "Matt", "Danny", "Mashu" ]
+puts
+
+print rotate_array([ "a", "b", "c", "d" ], 2) # => [ "c", "d", "a", "b" ]
+puts
