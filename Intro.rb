@@ -610,3 +610,30 @@ p names_arr_2.index("mami") # nil
 
 puts names_arr_2.include?("Luis") # true
 puts names_arr_2.include?("tito") # false
+
+hello_str = "Hello"
+puts hello_str.include?("ello") # 1
+puts hello_str.include?("elloz") # nil
+
+
+# Ranges
+
+letters_arr = ["a", "b", "c", "d", "e"]
+
+puts letters_arr[1...3] #exclusive [b,c]
+puts letters_arr[1..3] #inclusive [b,c,d]
+
+str_bootcamp = "bootcamp"
+
+puts str_bootcamp[1..3] # oot
+puts str_bootcamp[1...3] #oo
+puts str_bootcamp[2..-1] #otcamp
+puts str_bootcamp[-2] #m
+
+str_yellow = "Follow the yellow brick road"
+
+print str_yellow.split(" ")
+
+how_are_you_arr = ["How", "are", "you"]
+puts
+puts how_are_you_arr.join(" ")
