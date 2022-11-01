@@ -795,7 +795,7 @@ end
 puts reverse_words('keep coding') # => 'peek gnidoc'
 puts reverse_words('simplicity is prerequisite for reliability') # => 'yticilpmis si etisiuqererp rof ytilibailer'
 
-def rotate_array(arr, num)
+def rotate_array(arr,num)
     num.times do 
         arr.unshift(arr.pop)
     end
@@ -807,3 +807,178 @@ puts
 
 print rotate_array([ "a", "b", "c", "d" ], 2) # => [ "c", "d", "a", "b" ]
 puts
+
+# Nested loops
+
+(1..3).each do |num1|
+    puts num1
+    puts "---"
+    (1..5).each do |num2|
+        puts num2
+    end
+
+end
+
+vowels_arr = ["a", "e", "i", "o", "u"]
+
+vowels_arr.each_with_index do |ele1, idx1|
+    vowels_arr.each_with_index do |ele2, idx2|
+        if idx2 > idx1
+            puts ele1 + ele2 
+            puts idx1.to_s + " " + idx2.to_s
+        end
+    end
+    puts "-------"
+end
+
+some_arr = [
+    ["a", "b", "c"],
+    ["d", "e"],
+    ["f", "g", "j", "k"]
+]
+
+puts some_arr[2].length # 4
+puts some_arr[2][0] == "f" # true
+puts some_arr[1].length # 2
+puts some_arr[1][1] == "e" #true
+puts some_arr.length # 3
+
+some_arr.each do |sub_arr|
+    print sub_arr
+    puts
+    sub_arr.each do |ele|
+        puts ele
+    end
+    puts"----"
+end
+
+def combinations(arr)
+
+    new_arr = []
+
+    arr.each_with_index do |ele1, idx1|
+        arr.each_with_index do |ele2, idx2|
+            new_arr << [ele1, ele2] if idx2 > idx1
+        end
+    end
+
+    new_arr
+
+end
+
+print combinations(["a", "b", "c"]); # => [ [ "a", "b" ], [ "a", "c" ], [ "b", "c" ] ]
+puts
+
+print combinations([0, 1, 2, 3]); # => [ [ 0, 1 ], [ 0, 2 ], [ 0, 3 ], [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ]
+puts
+
+def opposite_count(nums)
+    sum = 0
+
+    nums.each_with_index do |num1, idx1|
+        nums.each_with_index do |num2, idx2|
+            sum += 1 if idx2 > idx1 && num1 + num2 == 0
+        end
+    end
+    sum
+end
+
+puts opposite_count([ 2, 5, 11, -5, -2, 7 ]) # => 2
+puts opposite_count([ 21, -23, 24 -12, 23 ]) # => 1
+
+def two_d_sum(arr)
+    sum = 0
+
+    arr.each do |sub_arr|
+        sub_arr.each do |ele|
+            sum += ele
+        end
+    end
+
+    sum
+end
+
+array_1 = [
+  [4, 5],
+  [1, 3, 7, 1]
+]
+puts two_d_sum(array_1)    # => 21
+
+array_2 = [
+  [3, 3],
+  [2],
+  [2, 5]
+]
+puts two_d_sum(array_2)    # => 15
+
+def two_d_translate(arr)
+    new_arr = []
+
+    arr.each do |pair_arr|
+        pair_arr[1].times { new_arr << pair_arr[0] }
+    end
+
+    new_arr
+end
+
+arr_1 = [
+  ['boot', 3],
+  ['camp', 2],
+  ['program', 0]
+]
+
+print two_d_translate(arr_1) # => [ 'boot', 'boot', 'boot', 'camp', 'camp' ]
+puts
+
+arr_2 = [
+  ['red', 1],
+  ['blue', 4]
+]
+
+print two_d_translate(arr_2) # => [ 'red', 'blue', 'blue', 'blue', 'blue' ]
+puts
+
+def array_translate(array)
+
+    str = ""
+    i = 0
+
+    while i < array.length
+        array[i + 1].times { str += array[i] }
+        i += 2
+    end
+
+    str
+
+end
+
+print array_translate(["Cat", 2, "Dog", 3, "Mouse", 1]); # => "CatCatDogDogDogMouse"
+puts
+
+print array_translate(["red", 3, "blue", 1]); # => "redredredblue"
+puts
+
+# Pig latin translation uses the following rules:
+# - for words that start with a vowel, add 'yay' to the end
+# - for words that start with a nonvowel, move all letters before the first vowel to the end of the word and add 'ay'
+
+def pig_latin_word(word)
+
+    new_word = ""
+
+    if $vowels.include?(word[0])
+        new_word += word + "yay"
+    else
+        first_vowel_idx = 0
+        word.each_char.with_index { |ele, idx| first_vowel_idx = idx if $vowels.include?(ele) }
+        new_word += word[first_vowel_idx..-1] + word[0...first_vowel_idx] + "ay"
+    end
+
+    new_word
+
+end
+
+puts pig_latin_word("apple")   # => "appleyay"
+puts pig_latin_word("eat")     # => "eatyay"
+puts pig_latin_word("banana")  # => "ananabay"
+puts pig_latin_word("trash")   # => "ashtray"
