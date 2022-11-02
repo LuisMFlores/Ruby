@@ -982,3 +982,33 @@ puts pig_latin_word("apple")   # => "appleyay"
 puts pig_latin_word("eat")     # => "eatyay"
 puts pig_latin_word("banana")  # => "ananabay"
 puts pig_latin_word("trash")   # => "ashtray"
+
+# Hashes
+
+my_hash = {"name" => "App Academy", "color" => "red", "age" => 5}
+
+puts my_hash["name"] #App Academy
+
+my_hash["color"] = "blue"
+
+puts my_hash
+
+dog = {
+    "name" => "fido",
+    "color" => "black",
+    "age" => 3,
+    "isHungry" => true,
+    "enemies" => ["squirrel"]
+}
+
+dog["location"] = "NYC"
+
+puts dog["enemies"]
+
+puts dog
+
+dog["enemies"] << "cats"
+
+puts dog
+
+puts dog.has_key?("location") # true
