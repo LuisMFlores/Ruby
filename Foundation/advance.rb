@@ -30,3 +30,24 @@ multi_d = [
 ]
 
 p multi_d.flatten   # => ["a", "b", "c", "d", "e", "f"]
+
+# Symbols
+
+str = "hello"
+sym = :hello
+
+puts str == sym #false
+
+puts str.object_id
+str[0] = "Luima"
+puts str
+puts str.object_id
+
+puts :hello.object_id # Same object
+puts sym.object_id # Sabe object
+
+# Symbols as hash
+
+my_bootcamp = { name: "App Academy", color: "red", location: ["NY", "SF", "ONLINE"] }
+puts my_bootcamp[:name]
+
