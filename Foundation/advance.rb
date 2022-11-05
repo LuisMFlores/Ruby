@@ -78,3 +78,36 @@ def modify_string(str, option = { upper: false, repeats: 21})
 end
 
 puts modify_string("hello", upper: true, repeats: 5)
+
+# Splat operator (*)
+
+# * arrays of arguments
+
+def print_method(arg_1, arg_2, *other_args)
+    p arg_1
+    p arg_2
+    p other_args
+end
+
+print_method("Hello", "How are you", "a","b","c","d","e")
+
+# * decompose of an array
+
+def greet_splat(first_name, last_name)
+    "Welcome #{first_name} #{last_name}!"
+end
+
+name_arr = ["Luis", "Flores"]
+
+puts greet_splat(*name_arr)
+
+arr_1 = ["a", "b"]
+arr_2 = ["d", "e"]
+p [*arr_1,"c",*arr_2]
+
+# ** double splat operator decompose hash
+
+old_hash = { a: 1, b: 2}
+new_hash = {**old_hash, c: 3}
+
+puts new_hash
