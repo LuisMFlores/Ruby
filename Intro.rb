@@ -1203,3 +1203,388 @@ arr2 = ["dog", "cat", "mouse"]
 hash2 = {"dog"=>"bork", "cat"=>"meow", "duck"=>"quack"}
 print element_replace(arr2, hash2) # => ["bork", "meow", "mouse"]
 puts
+
+# Map & Select
+
+new_arr = vowels_arr.map { |ele| ele.upcase + "!"}
+puts new_arr
+
+nums_arr = [1,2,3,4,5]
+puts nums_arr.select { |ele| ele % 2 == 0 }
+
+# Advance methods
+
+def map_by_name(arr)
+    arr.map { |hash| hash["name"] }
+end
+
+
+pets = [
+  {"type"=>"dog", "name"=>"Rolo"},
+  {"type"=>"cat", "name"=>"Sunny"},
+  {"type"=>"rat", "name"=>"Saki"},
+  {"type"=>"dog", "name"=>"Finn"},
+  {"type"=>"cat", "name"=>"Buffy"}
+]
+print map_by_name(pets) #=> ["Rolo", "Sunny", "Saki", "Finn", "Buffy"]
+puts
+
+countries = [
+ {"name"=>"Japan", "continent"=>"Asia"},
+ {"name"=>"Hungary", "continent"=>"Europe"},
+ {"name"=>"Kenya", "continent"=>"Africa"},
+]
+print map_by_name(countries) #=> ["Japan", "Hungary", "Kenya"]
+puts
+
+def map_by_key(arr, key)
+    arr.map { |hash| hash[key] }
+end
+
+locations = [
+  {"city"=>"New York City", "state"=>"New York", "coast"=>"East"},
+  {"city"=>"San Francisco", "state"=>"California", "coast"=>"West"},
+  {"city"=>"Portland", "state"=>"Oregon", "coast"=>"West"},
+]
+
+print map_by_key(locations, "state") #=> ["New York", "California", "Oregon"]
+puts
+print map_by_key(locations, "city") #=> ["New York City", "San Francisco", "Portland"]
+puts
+
+def yell_sentence(sent)
+    sent.split(" ").map { |char| char.upcase + "!" }.join(" ")
+end
+
+puts yell_sentence("I have a bad feeling about this") #=> "I! HAVE! A! BAD! FEELING! ABOUT! THIS!"
+
+def whisper_words(words)
+    words.map { |word| word.downcase + "..."}
+end
+
+print whisper_words(["KEEP", "The", "NOISE", "down"]) # => ["keep...", "the...", "noise...", "down..."]
+puts
+
+def o_words(sentence)
+    sentence.split(" ").select { |word|  word.include?("o") }
+end
+
+print o_words("How did you do that?") #=> ["How", "you", "do"]
+puts
+
+def last_index(str, char)
+  i = str.length - 1
+  while i >= 0
+    return i if str[i] == char
+    i -= 1
+  end
+end
+
+puts last_index("abca", "a")       #=> 3
+puts last_index("mississipi", "i") #=> 9
+puts last_index("octagon", "o")    #=> 5
+puts last_index("programming", "m")#=> 7
+
+def most_vowels(sentence)
+    current_long_word = ""
+
+    sentence.split(" ").each { |word| current_long_word = count_vowel(current_long_word, word)}
+
+    current_long_word
+end
+
+def count_vowel(word1, word2)
+    word1_count = word1.split("").select { |char| $vowels.include?(char) }
+    word2_count = word2.split("").select { |char| $vowels.include?(char) }
+
+    word1 < word2 ? word2 : word1
+end
+
+print most_vowels("what a wonderful life") #=> "wonderful"
+
+def prime?(num)
+    return false if num < 2
+    (2...num).each { |factor|  return false if num % factor == 0 }
+    true
+end
+
+puts
+puts prime?(2)  #=> true
+puts prime?(5)  #=> true
+puts prime?(11) #=> true
+puts prime?(4)  #=> false
+puts prime?(9)  #=> false
+puts prime?(-5) #=> false
+
+def pick_primes(numbers)
+    numbers.select { |num| prime?(num) }
+end
+
+print pick_primes([2, 3, 4, 5, 6]) #=> [2, 3, 5]
+puts
+print pick_primes([101, 20, 103, 2017]) #=> [101, 103, 2017]
+puts
+
+def prime_factors(num)
+    (2...num).select { |factor| num % factor == 0 && prime?(factor) }
+end
+
+print prime_factors(24) #=> [2, 3]
+puts
+print prime_factors(60) #=> [2, 3, 5]
+puts
+
+def greatest_factor_array(arr)
+    arr.map { |num| num.even? ? get_factor(num) : num }
+end
+
+def get_factor(num)
+    (1...num).reverse_each { |factor| return factor if num % factor == 0 }
+end
+
+print greatest_factor_array([16, 7, 9, 14]) # => [8, 7, 9, 7]
+puts
+print greatest_factor_array([30, 3, 24, 21, 10]) # => [15, 3, 12, 21, 5]
+puts
+
+def perfect_square?(num)
+    (1..num).each { |factor| return true if factor * factor == num }
+    false
+end
+
+puts perfect_square?(5)   #=> false
+puts perfect_square?(12)  #=> false
+puts perfect_square?(30)  #=> false
+puts perfect_square?(9)   #=> true
+puts perfect_square?(25)  #=> true
+
+def triple_sequence(start, length)
+    triple_arr = [start]
+    (length - 1).times { triple_arr << triple_arr[-1] * 3 }
+    triple_arr
+end
+
+print triple_sequence(2, 4) # => [2, 6, 18, 54]
+puts
+print triple_sequence(4, 5) # => [4, 12, 36, 108, 324]
+puts
+
+puts "---"
+
+def summation_sequence(start, length)
+    seq = [start]
+
+    while seq.length < length
+        seq << sumation(seq[-1])
+    end
+
+    seq
+end
+
+def sumation(num)
+    (1..num).reduce(0) {|acc, ele_num| acc += ele_num }
+end
+
+print summation_sequence(3, 4) # => [3, 6, 21, 231]
+puts
+print summation_sequence(5, 3) # => [5, 15, 120]
+
+puts 
+
+def fibonacci(length)
+    initial_arr = [1,1]
+    return [] if length < 1
+    return initial_arr.take(length) if length < 3
+
+    while initial_arr.length < length
+     initial_arr << initial_arr[-1] + initial_arr[-2]
+    end
+
+    initial_arr
+end
+
+print fibonacci(0) # => []
+puts
+print fibonacci(1) # => [1]
+puts
+print fibonacci(6) # => [1, 1, 2, 3, 5, 8]
+puts
+print fibonacci(8) # => [1, 1, 2, 3, 5, 8, 13, 21]
+puts
+
+# Feel free to use this variable:
+$alphabet = "abcdefghijklmnopqrstuvwxyz"
+$alphabet_hash = Hash.new("")
+
+$alphabet.each_char.with_index { |char, idx| $alphabet_hash[idx] = char }
+
+def caesar_cipher(str, num)
+    str.split("").map { |char| cipher_char(char, num) }.join("")
+end
+
+def cipher_char(char,num)
+    $alphabet_hash[($alphabet.index(char) + num) % 26]
+end
+
+puts caesar_cipher("apple", 1)    #=> "bqqmf"
+puts caesar_cipher("bootcamp", 2) #=> "dqqvecor"
+puts caesar_cipher("zebra", 4)    #=> "difve"
+
+puts
+
+def vowel_cipher(string)
+    string.split("").map do |char|
+        if $vowels.include?(char)
+            next_vowel(char) 
+        else
+            char
+        end
+    end.join("")
+end
+
+def next_vowel(char)
+    $vowels[($vowels.index(char) + 1) % 5]
+end
+
+puts vowel_cipher("bootcamp") #=> buutcemp
+puts vowel_cipher("paper cup") #=> pepir cap
+
+def double_letter_count(string)
+    string.split(" ").count { |word| double_letter_word?(word) }
+end
+
+def double_letter_word?(word)
+    hash_char = Hash.new(0)
+    word.each_char { |char| hash_char[char] += 1 }
+    hash_char.values.each { |ele| return true if ele >= 2 }
+    false 
+end
+
+puts double_letter_count("the jeep rolled down the hill") #=> 3
+puts double_letter_count("bootcamp") #=> 1
+
+def adjacent_sum(arr)
+
+end
+
+print adjacent_sum([3, 7, 2, 11]) #=> [10, 9, 13], because [ 3+7, 7+2, 2+11 ]
+puts
+print adjacent_sum([2, 5, 1, 9, 2, 4]) #=> [7, 6, 10, 11, 6], because [2+5, 5+1, 1+9, 9+2, 2+4]
+puts
+
+def adjacent_sum(arr)
+  new_arr = []
+  (0...arr.length).each do |idx|
+    new_arr << arr[idx] + arr[idx + 1] if arr[idx + 1] != nil 
+  end
+  new_arr
+end
+
+print adjacent_sum([3, 7, 2, 11]) #=> [10, 9, 13], because [ 3+7, 7+2, 2+11 ]
+puts
+print adjacent_sum([2, 5, 1, 9, 2, 4]) #=> [7, 6, 10, 11, 6], because [2+5, 5+1, 1+9, 9+2, 2+4]
+puts
+
+# For example, the base [1, 4, 6] gives us the following pyramid
+#     15
+#   5   10
+# 1   4    6
+
+def pyramid_sum(base)
+    pyramid_arr = [base]
+
+    while pyramid_arr.length < base.length
+        pyramid_arr << adjacent_sum(pyramid_arr[-1])
+    end
+
+    pyramid_arr.reverse
+end
+
+print pyramid_sum([1, 4, 6]) #=> [[15], [5, 10], [1, 4, 6]]
+puts
+
+print pyramid_sum([3, 7, 2, 11]) #=> [[41], [19, 22], [10, 9, 13], [3, 7, 2, 11]]
+puts
+
+def all_else_equal(arr)
+    mid_num = arr.reduce(0) { |acc, num| acc += num } / 2
+    return mid_num if arr.include?(mid_num)
+    nil
+end
+
+p all_else_equal([2, 4, 3, 10, 1]) #=> 10, because the sum of all elements is 20
+p all_else_equal([6, 3, 5, -9, 1]) #=> 3, because the sum of all elements is 6
+p all_else_equal([1, 2, 3, 4])     #=> nil, because the sum of all elements is 10 and there is no 5 in the array
+
+
+def anagrams?(word1, word2)
+    get_hash(word1) == get_hash(word2)
+end
+
+def get_hash(word)
+    word_hash = Hash.new(0)
+    word.each_char { |char| word_hash[char] += 1 }
+    word_hash
+end
+
+puts anagrams?("cat", "act")          #=> true
+puts anagrams?("restful", "fluster")  #=> true
+puts anagrams?("cat", "dog")          #=> false
+puts anagrams?("boot", "bootcamp")    #=> false
+
+def consonant_cancel(sentence)
+    sentence.split(" ").map { |word| remove_consonant(word) }.join(" ")
+end
+
+def remove_consonant(word)
+    i = 0
+
+    while i < word.length
+        if $vowels.include?(word[i])
+            return word[i..-1]
+        end
+        i += 1
+    end
+
+    word
+end
+
+puts consonant_cancel("down the rabbit hole") #=> "own e abbit ole"
+puts consonant_cancel("writing code is challenging") #=> "iting ode is allenging"
+
+def same_char_collapse(str)
+    new_str = str
+    repeat = true
+    while repeat
+        repeat = false
+        temp_str = remove_same_char(new_str)
+        if new_str != temp_str
+            new_str = temp_str
+            repeat = true
+        end
+    end
+
+    new_str
+end
+
+def remove_same_char(word)
+    i = 0
+    j = i + 1
+    new_word = word
+    while j < word.length
+        if word[i] == word[j]
+            new_word = word[0...i] + word[j + 1..-1]
+            break
+        end
+        i += 1
+        j += 1
+    end
+    new_word
+end
+
+puts same_char_collapse("zzzxaaxy")   #=> "zy"
+# because zzzxaaxy -> zxaaxy -> zxxy -> zy
+
+
+puts same_char_collapse("uqrssrqvtt") #=> "uv"
+# because uqrssrqvtt -> uqrrqvtt -> uqqvtt -> uvtt -> uv
