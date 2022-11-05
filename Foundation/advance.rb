@@ -51,3 +51,30 @@ puts sym.object_id # Sabe object
 my_bootcamp = { name: "App Academy", color: "red", location: ["NY", "SF", "ONLINE"] }
 puts my_bootcamp[:name]
 
+
+# Default argument
+
+def great_with(user, message = "Welcome")
+    message + " " + user
+end
+
+puts great_with("Luis") # Welcome Luis
+puts great_with("Luis", "Hello") # Hello Luis
+
+# Option hashes
+
+def some_method(hash)
+    hash
+end
+
+puts some_method( name: "App Academy", red: "Red" )
+
+def modify_string(str, option = { upper: false, repeats: 21})
+    if option[:upper]
+        str.upcase * option[:repeats]
+    else
+        str.downcase * option[:repeats]
+    end
+end
+
+puts modify_string("hello", upper: true, repeats: 5)
