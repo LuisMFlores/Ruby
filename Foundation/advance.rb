@@ -111,3 +111,8 @@ old_hash = { a: 1, b: 2}
 new_hash = {**old_hash, c: 3}
 
 puts new_hash
+
+# Inject method
+
+puts [11, 7, 2, 4].inject { |acc, el| acc + el }
+puts [11, 7, 2, 4].inject(0) { |acc, el| el.even? ? acc + el : acc }
