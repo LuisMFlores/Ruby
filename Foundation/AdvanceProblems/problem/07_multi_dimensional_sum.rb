@@ -19,3 +19,23 @@ arr_2 = [
 ]
 
 p multi_dimensional_sum(arr_2)    # => 24
+
+
+# Scope & References
+
+def bubble_sort(arr)
+
+    sorted = false
+
+    while !sorted
+        sorted = true
+        (0...arr.length).each do |idx|
+            if arr[idx] > arr[idx + 1]
+                arr[idx], arr[idx + 1] = arr[idx + 1], arr[idx]
+                sorted = false
+            end
+        end
+    end
+
+    arr 
+end
