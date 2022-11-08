@@ -117,8 +117,35 @@ puts new_hash
 puts [11, 7, 2, 4].inject { |acc, el| acc + el }
 puts [11, 7, 2, 4].inject(0) { |acc, el| el.even? ? acc + el : acc }
 
-# Constant - cannot be reassigned but can be mutated
+# Global variables - has global scope
+
+$global_var = "Some var"
+
+# Constant - cannot be reassigned but can be mutated. has global scope
 
 FOOD = "pho"
 FOOD[0] = "L"
 puts FOOD # "Lho"
+
+# Begin/Rescue
+
+def protecting_divide(num1, num2)
+
+    begin
+        num1 / num2    
+    rescue => exception
+        puts exception
+    end
+end
+
+protecting_divide(1,0)
+
+# Raising
+
+def full_name(first_name, last_name)
+    raise "arguments must be string" if first_name.instance_of?(String) || last_name.instance_of?(String)
+    "#{first_name} #{last_name}"
+end
+
+puts full_name("Luis", "Manuel")
+puts full_name(43, true)
