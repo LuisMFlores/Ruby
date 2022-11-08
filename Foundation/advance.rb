@@ -116,3 +116,9 @@ puts new_hash
 
 puts [11, 7, 2, 4].inject { |acc, el| acc + el }
 puts [11, 7, 2, 4].inject(0) { |acc, el| el.even? ? acc + el : acc }
+
+# Constant - cannot be reassigned but can be mutated
+
+FOOD = "pho"
+FOOD[0] = "L"
+puts FOOD # "Lho"

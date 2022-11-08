@@ -4,34 +4,28 @@
 
 def compress_str(str)
     new_str = ""
-    current_char = []
+    
+    i = 0
+    while i < str.length
+        char = str[i]
+        count = 0
 
-    str.each_char do |char|
-        if current_char.last == char
-            current_char << char
+        while char == str[i]
+            count += 1
+            i += 1
+        end
+
+        if count > 1
+            new_str += count.to_s + char    
         else
-            new_str += compress_str_char(current_char)
-            current_char = [char]
+            new_str += char
         end
     end
 
-    new_str += compress_str_char(current_char)
-
     new_str
-end
-
-def compress_str_char(chars)
-    num = chars.length > 1 ? chars.length : ""
-    "#{num}#{chars.last}"
 end
 
 p compress_str("aaabbc")        # => "3a2bc"
 p compress_str("xxyyyyzz")      # => "2x4y2z"
 p compress_str("qqqqq")         # => "5q"
 p compress_str("mississippi")   # => "mi2si2si2pi"
-
-# Constant - cannot be reassigned but can be mutated
-
-FOOD = "pho"
-FOOD[0] = "L"
-puts FOOD # "Lho"
