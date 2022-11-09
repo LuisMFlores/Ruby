@@ -30,8 +30,3 @@ p compress_str("xxyyyyzz")      # => "2x4y2z"
 p compress_str("qqqqq")         # => "5q"
 p compress_str("mississippi")   # => "mi2si2si2pi"
 
-# Constant - cannot be reassigned but can be mutated
-
-FOOD = "pho"
-FOOD[0] = "L"
-puts FOOD # "Lho"
