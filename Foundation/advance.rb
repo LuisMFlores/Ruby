@@ -1,5 +1,7 @@
 # Enumerables
 
+require "byebug"
+
 puts [2,4,6,7,13,21,100].all? { |el| el.even? } # false
 puts [3, 9, 15].all? { |el| !el.even? } # true
 
@@ -143,9 +145,18 @@ protecting_divide(1,0)
 # Raising
 
 def full_name(first_name, last_name)
-    raise "arguments must be string" if first_name.instance_of?(String) || last_name.instance_of?(String)
+    raise "arguments must be string" if !first_name.instance_of?(String) || !last_name.instance_of?(String)
     "#{first_name} #{last_name}"
 end
 
 puts full_name("Luis", "Manuel")
-puts full_name(43, true)
+
+begin
+    puts full_name(43, true)
+rescue => exception
+    puts exception
+end
+
+# Blocks
+
+puts str.each_char.map(&:upcase).join("")
