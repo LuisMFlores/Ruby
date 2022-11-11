@@ -160,3 +160,68 @@ end
 # Blocks
 
 puts str.each_char.map(&:upcase).join("")
+
+# Procs
+
+doubler = Proc.new { |num| num * 2 }
+p doubler
+p doubler.call(7) # 14
+p doubler.call(5) # 10
+
+doubler = Proc.new { |num| num * 2 }
+p doubler
+p doubler.call(7) # 14
+p doubler.call(5) # 10
+
+is_even = Proc.new do |num|
+    if num % 2 == 0
+        true
+    else
+        false
+    end
+end
+
+sum = Proc.new { |num1, num2| num1 + num2 }
+
+p is_even.call(10) # true
+p sum.call(2,2) # 
+
+def add_and_proc(num_1, num_2, proc)
+    sum = num_1 + num_2
+    p proc.call(sum)
+end
+
+# --- V1 --- PROC AS ARGUMENTS
+
+add_and_proc(1,4,doubler) # 12
+
+multiplier = Proc.new { |num| num * 2 } # 10
+
+add_and_proc(3, 6, multiplier) # 18
+
+negate = Proc.new { |num| num * -1 }
+
+add_and_proc(1, 6, negate) #-7
+
+
+# V2 ---- BLOCKS AS ARGUMENTS
+
+def add_and_block(num1, num2, &prc)
+    p prc.call(num1 + num2)
+end
+
+add_and_block(1,5) { |num| num * 2 } # 12
+add_and_block(5,5) { |num| num * -1 } # -10
+add_and_block(10,5) { |num| num - 5 } # 10
+
+new_doubler = Proc.new { |num| num * 2 }
+
+def doubler_example(num1 = 1, num2 = 2, &prc)
+    p prc.call(num1 + num2)
+end
+
+doubler_example(1,5, &new_doubler) # 12
+doubler_example(1,6) { |num| num * 2 } # 14
+
+p [1,2,3].map(&new_doubler) # [2,4,6]
+
