@@ -225,3 +225,56 @@ doubler_example(1,6) { |num| num * 2 } # 14
 
 p [1,2,3].map(&new_doubler) # [2,4,6]
 
+# Classes
+
+class Cat
+
+    # Class variable. Can be change
+    @@number_of_legs = 4
+
+    # Class constant. Cannot be change
+    NUMBER_OF_LEGS = 4
+
+    # Class Method
+    def self.change_num_of_legs(num = 0)
+        @@number_of_legs = num
+    end
+
+    def initialize(name, color ,age)
+        @name = name
+        @color = color
+        @age = age
+    end
+
+    # Getter methods
+
+    def name
+        @name
+    end
+
+    def name=(name)
+        @name = name
+    end
+
+    def age
+        @age
+    end
+
+    def age=(age)
+        @age = age
+    end
+
+end
+
+cat_1 = Cat.new("Sennacy", "Brown", 3)
+cat_2 = Cat.new("Whiskers", "Black", 5)
+
+p cat_1
+p cat_2
+
+puts cat_1.name # Sennacy
+cat_1.name = "Luis"
+puts cat_1.name
+
+# Class#method_name means method_name is an instance method
+# Class::method_name means method_name is a class method
