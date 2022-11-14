@@ -278,3 +278,37 @@ puts cat_1.name
 
 # Class#method_name means method_name is an instance method
 # Class::method_name means method_name is a class method
+
+# Monkey Patching 
+
+ class String
+    
+    def upcase?
+        self.upcase == self
+    end
+
+end
+
+puts "HELLO".upcase? # true
+puts "hello".upcase? # false
+
+class Integer
+    def prime?
+        return false if self < 2
+        (2...self).none? { |num| self % num == 0 }
+    end
+end
+
+puts 1.prime? # false
+puts 4.prime? # false
+puts 15.prime? # false
+puts 17.prime? # true
+
+class Array
+    def has_zero?
+        self.one? { |ele| ele == 0 }
+    end
+end
+
+p [1,2,3].has_zero? # false
+p [0,10,11].has_zero? # true
