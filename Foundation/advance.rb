@@ -312,3 +312,13 @@ end
 
 p [1,2,3].has_zero? # false
 p [0,10,11].has_zero? # true
+
+# IN/OUT
+
+p "Enter your name"
+name = gets
+p "Your name is #{name.chomp}"
+
+p "Enter your age"
+age = gets.chomp.to_i
+p "Your age is #{age}"
