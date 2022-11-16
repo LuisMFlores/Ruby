@@ -322,3 +322,21 @@ p "Your name is #{name.chomp}"
 p "Enter your age"
 age = gets.chomp.to_i
 p "Your age is #{age}"
+
+
+# attr_reader & attr_writer & attr_accessor
+
+class Dog
+
+    attr_reader :name, :breed
+    attr_writer :name, :breed
+
+    def initialize(name, breed)
+        @name = name
+        @breed = breed
+    end
+
+end
+
+dog = Dog.new("Luis", "Labrador")
+puts dog.name
