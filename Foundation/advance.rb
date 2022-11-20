@@ -389,3 +389,25 @@ def fib(n)
 end
 
 puts fib(6)
+
+# spaceship operator
+
+puts 7<=>6 # 1
+puts 7<=>7 # 0
+puts 7<=>8 # -1
+
+# Truly and Falsely
+
+val = nil
+
+val ? puts("true") : puts("false") # false
+
+true || 42          # => true
+42 || true          # => 42
+false || 42         # => 42
+42 || false         # => 42
+false || "hello"    # => "hello"
+nil || "hello"      # => "hello"
+"hi" || "hello"     # => "hi"
+0 || true           # => 0
+false || nil        # => nil
