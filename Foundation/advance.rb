@@ -315,13 +315,13 @@ p [0,10,11].has_zero? # true
 
 # IN/OUT
 
-p "Enter your name"
-name = gets
-p "Your name is #{name.chomp}"
+# p "Enter your name"
+# name = gets
+# p "Your name is #{name.chomp}"
 
-p "Enter your age"
-age = gets.chomp.to_i
-p "Your age is #{age}"
+# p "Enter your age"
+# age = gets.chomp.to_i
+# p "Your age is #{age}"
 
 
 # attr_reader & attr_writer & attr_accessor
@@ -340,3 +340,52 @@ end
 
 dog = Dog.new("Luis", "Labrador")
 puts dog.name
+
+# Recursion
+
+def count_down(num)
+    if num == 0
+        puts "Lift off!"
+        return
+    end
+
+    puts num
+
+    count_down(num - 1)
+end
+
+count_down(10)
+
+# Write a method `factorial(n)` which takes a number and returns the factorial of n.
+# A factorial is the product of all whole numbers between 1 and n, inclusive.
+# For example, `factorial(5)` is 5 * 4 * 3 * 2 * 1 = 120.
+
+def factorial(n)
+    return 1 if n == 1
+    n * factorial(n - 1)
+end
+
+puts factorial(5)
+
+# Write a method fib(n) that takes in a number and returns the nth number of
+# the fibonacci sequence.
+# In the fibonacci sequence, the 1st number is 1 and the 2nd number is 1. To generate the
+# next number in the sequence, we take the sum of the previous two fibonacci numbers.
+# For example the first 5 numbers of the fibonacci sequence are `1, 1, 2, 3, 5`
+
+# Examples:
+
+# fib(1) # => 1
+# fib(2) # => 1
+# fib(3) # => 2
+# fib(4) # => 3
+# fib(5) # => 5
+# fib(6) # => 8
+# fib(7) # => 13
+
+def fib(n)
+  return 1 if n == 1 || n == 2
+  fib(n - 1) + fib(n - 2)
+end
+
+puts fib(6)
