@@ -114,7 +114,7 @@ class String
         alphabet = ("a".."z").to_a
         new_str = ""
       
-        self.each_char do |char|
+        self.chars.map! do |char|
           old_idx = alphabet.index(char)
           new_idx = old_idx + num
           new_char = alphabet[new_idx % 26]
