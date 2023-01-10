@@ -35,6 +35,7 @@ class Grid
 
         row, col = pos
         @grid[row][col] = v
+        puts "Win? #{self.win?(v)}"
     end
 
     def [](pos)
@@ -103,6 +104,10 @@ class Grid
         top_left_to_down_right_idxs.all? { |pos| self[pos] == mark } || bottom_left_to_top_right_idxs.all? { |pos| self[pos] == mark}
 
     end
+    
+    def win?(mark)
+        self.win_row?(mark) || self.win_col?(mark) || self.win_diagonal?(mark)
+    end
 
     def empty_positions?
         itirate_grid { |pos| return true if self[pos] == EMPTY_MARK }
@@ -111,42 +116,14 @@ class Grid
 
 end
 
-
 grid = Grid.new
-grid.print_grid
-puts
-
-# Row
 grid[[0,0]] = :X
-grid[[0,1]] = :X
+grid[[0,1]] = :O
 grid[[0,2]] = :X
-grid.print_grid
-puts "ROW is #{grid.win_row?(:X)}"
-puts
-
-# Col
-grid.load_empty_grid
-grid[[0,0]] = :X
-grid[[1,0]] = :X
-grid[[2,0]] = :X
-grid.print_grid
-puts "COL is #{grid.win_col?(:X)}"
-puts
-
-
-# # Diagonal
-grid.load_empty_grid
-grid[[0,0]] = :X
+grid[[1,0]] = :O
 grid[[1,1]] = :X
-grid[[2,2]] = :X
-puts
-grid.print_grid
-puts "DIA is #{grid.win_diagonal?(:X)} "
+grid[[1,2]] = :O
+grid[[2,0]] = :X
+grid[[2,1]] = :O
 
-# debugger
-# puts
-
-puts "There is a empty space in the grid? #{grid.empty_positions?}"
-puts 
-grid.fill_grid
-puts "There is a empty space in the grid? #{grid.empty_positions?}"
+print grid.print_grid
