@@ -19,7 +19,3 @@ class Player
     end
 
 end
-
-player = Player.new(:X)
-p player.mark
-p player.get_position
