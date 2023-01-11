@@ -33,7 +33,6 @@ class Board
 
         row, col = pos
         @grid[row][col] = v
-        puts "Win? #{self.win?(v)}"
     end
 
     def [](pos)
@@ -42,6 +41,7 @@ class Board
     end
 
     def valid?(pos)
+    
         row, col = pos
 
         min_row = 0
@@ -110,6 +110,12 @@ class Board
     def empty_positions?
         itirate_grid { |pos| return true if self[pos] == EMPTY_MARK }
         false
+    end
+
+    def legal_positions
+        legal_pos_arr = []
+        itirate_grid { |pos| legal_pos_arr << pos if self[pos] == EMPTY_MARK }
+        legal_pos_arr
     end
 
 end

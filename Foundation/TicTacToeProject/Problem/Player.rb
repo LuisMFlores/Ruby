@@ -1,5 +1,3 @@
-require "byebug"
-
 class Player
 
     attr_reader :mark
@@ -8,14 +6,9 @@ class Player
         @mark = mark
     end
 
-    def get_position
+    def get_position(legal_positions)
         puts "Your turn #{self.mark}"
         puts "Type your position and divide using a whitespace: "
-
-        pos = gets.chomp.split(" ")
-        raise "Unformatted input!" if pos.length != 2
-
-        pos.map(&:to_i)
     end
 
 end
