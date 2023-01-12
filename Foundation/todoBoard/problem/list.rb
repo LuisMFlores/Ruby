@@ -3,7 +3,7 @@ require "./item.rb"
 
 class List
 
-    LINE_WIDTH = 40
+    LINE_WIDTH = 48
 
     attr_accessor :label
 
@@ -52,11 +52,11 @@ class List
         puts "-" * LINE_WIDTH
         puts "".ljust(12," ") + self.label + "".ljust(12," ")
         puts "-" * LINE_WIDTH
-        puts "Index".ljust(6," ") + " | " + "Item".ljust(15," ") + " | " + "Deadline".ljust(6," ")
+        puts "Index".ljust(6," ") + " | " + "Item".ljust(15," ") + " | " + "Deadline".ljust(6," ") + " | " + "Done".ljust(6, " ")
         puts "-" * LINE_WIDTH
 
         @items.each_with_index do |item, idx|
-            puts "#{idx}".ljust(6, " ") + " | " + "#{item.title}".ljust(15, " ") + " | " + "#{item.dateline}"
+            puts "#{idx}".ljust(6, " ") + " | " + "#{item.title}".ljust(15, " ") + " | " + "#{item.dateline}".ljust(6, " ") + " | " + "[#{item.done ? "✓" : " "}]"
         end
     end
 
@@ -99,12 +99,19 @@ class List
         @items.sort_by!(&:dateline)
     end
 
+    def toggle_item(idx)
+        @items[idx].toggle
+    end
+
+    def remove_item(index)
+        return false if !self.valid_index?(index)
+        @items.delete_at(index)
+        true
+    end
+
+    def purge
+        @items = @items.select { |item| !item.done }
+    end
+
 end
 
-list = List.new("Groceries")
-list.add_item("Eggs", "2020-01-02", "Dozen")
-list.add_item("Peperoni", "2020-01-03", "Mini")
-list.add_item("Flour", "2020-01-01", "2 pounds")
-list.add_item("juice", "2020-01-04", "1 gallon")
-list.add_item("pepsi", "2016-01-01", "12 cans")
-list.add_item("cheese", "2012-01-01", "2 pounds")

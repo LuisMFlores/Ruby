@@ -2,7 +2,7 @@ require "byebug"
 
 class Item
 
-    attr_reader :dateline
+    attr_reader :dateline, :done
     attr_accessor :title, :description
 
     def self.valid_date?(date)
@@ -15,18 +15,23 @@ class Item
         true
     end
 
-    def initialize(title, dateline, description)
+    def initialize(title, dateline, description, done = false)
         @title = title
         @description = description
 
         raise "Wrong format date" if !Item.valid_date?(dateline)
 
         @dateline = dateline
+        @done = done
     end
 
     def dateline=(date)
         raise "Invalid dateline inputted" if !Item.valid_date?(date)
         @dateline = date
+    end
+
+    def toggle
+        @done ? @done = false : @done = true
     end
 
 end
