@@ -5,18 +5,14 @@ class GhostGame
 
     ALPHABET = ("a".."z").to_a
 
-    attr_reader :current_player, :previous_player
-
-    def initialize(player_1, player_2)
-        @player_1 = player_1
-        @player_2 = player_2
-
-        @current_player = @player_1
-        @previous_player = @player_2
+    def initialize(*players)
+        @players = players
+        @current_player = @players.first
+        @previous_player = nil
 
         @fragment = ""
         @dictionary = {}
-        @losses = { player_1 => 0, player_2 => 0}
+        @losses = Hash.new { |hash, k| hash[k] = 0 }
         load_dictionary
     end
 
@@ -25,15 +21,25 @@ class GhostGame
     end
 
     def play_round
-        until self.game_over?
-            take_turn(current_player)
+        until self.win?
+            take_turn(@current_player)
         end
 
-        puts "##{@previous_player.name} you lost!. Better luck next time!"
+        puts "#{@players.first.name} YOU WON THE GAME. Congratulations!"
     end
 
     def next_player!
-        @current_player, @previous_player = @previous_player, @current_player
+        valid_next_player = nil
+        until valid_next_player
+            @players.rotate!(-1)
+            top_player = @players.first
+            if top_player != @current_player && @losses[top_player] < 5
+                @previous_player = @current_player
+                valid_next_player = top_player
+            end
+        end
+
+        @current_player = valid_next_player
     end
 
     def take_turn(player)
@@ -50,11 +56,24 @@ class GhostGame
 
         if self.completed_fragment?
             puts "#{@previous_player.name} you lost this round."
-            puts "The score is #{@current_player.name}: #{self.record(@current_player)} | #{@previous_player.name}: #{self.record(@previous_player)}"
+            self.remove_player?(@previous_player)
+            self.print_players_scores
         else
-            self.take_turn(self.current_player)
+            self.take_turn(@current_player)
         end
 
+    end
+
+    def print_players_scores
+        active_playes = @players.select{ |player| @losses[player] < 5 }
+        active_playes.each { |player| puts "Name: #{player.name} | Word Completion: #{self.record(player)}"}
+    end
+
+    def remove_player?(player)
+        if @losses[player] >= 5
+            puts "#{player.name} you have been eliminated!"
+            @players.delete(player)
+        end
     end
 
     def completed_fragment?
@@ -78,8 +97,8 @@ class GhostGame
         @dictionary.keys.any? { |key| key.start_with?(new_frag) }
     end
 
-    def game_over?
-        @losses.values.any? { |v| v >= "GHOST".length }
+    def win?
+        @losses.values.one? { |v| v < "GHOST".length }
     end
 
     def losses
@@ -92,5 +111,5 @@ class GhostGame
 
 end
 
-game = GhostGame.new(Player.new("Luis"), Player.new("Gordo"))
+game = GhostGame.new(Player.new("Luis"), Player.new("Gordo"), Player.new("Merlin"), Player.new("Jean"))
 game.play_round
