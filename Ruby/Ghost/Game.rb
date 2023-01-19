@@ -1,5 +1,7 @@
 require "byebug"
 require "./Player.rb"
+require "./HumanPlayer.rb"
+require "./AiPlayer.rb"
 
 class GhostGame
 
@@ -12,7 +14,7 @@ class GhostGame
 
         @fragment = ""
         @dictionary = {}
-        @losses = Hash.new { |hash, k| hash[k] = 0 }
+        @losses = Hash.new { |hash, k| hash[k] = 4 }
         load_dictionary
     end
 
@@ -20,12 +22,16 @@ class GhostGame
         File.foreach("GhostGameDictionary.txt") { |line| @dictionary[line.chomp] = 1 }
     end
 
-    def play_round
+    def run 
         until self.win?
-            take_turn(@current_player)
+            self.play_round
         end
 
         puts "#{@players.first.name} YOU WON THE GAME. Congratulations!"
+    end
+
+    def play_round
+        take_turn(@current_player)
     end
 
     def next_player!
@@ -42,20 +48,31 @@ class GhostGame
         @current_player = valid_next_player
     end
 
+    def get_player_input(player)
+        return input = player.guess(@fragment) if player.is_a?(Humanplayer)
+        input = player.guess(@fragment, @players.length, @dictionary) if player.is_a?(Aiplayer)
+        sleep(1.5)
+        print input
+        puts
+        input
+    end
+
     def take_turn(player)
         print "Player #{player.name} enter a letter: "
-        input = player.guess(@fragment)
+        input = self.get_player_input(player)
 
         until valid_play?(input)
             print "Please enter valid input: "
-            input = player.guess(@fragment)
+            input = self.get_player_input(player)
+            abort if input == "quit"
         end
 
         @fragment += input
         self.next_player!
 
         if self.completed_fragment?
-            puts "#{@previous_player.name} you lost this round."
+            puts "#{@previous_player.name} you completed the word #{@fragment}. You lost this round!."
+            @fragment = ""
             self.remove_player?(@previous_player)
             self.print_players_scores
         else
@@ -79,7 +96,6 @@ class GhostGame
     def completed_fragment?
         if @dictionary.has_key?(@fragment)
             @losses[@previous_player] += 1
-            @fragment = ""
             return true
         end
 
@@ -111,5 +127,11 @@ class GhostGame
 
 end
 
-game = GhostGame.new(Player.new("Luis"), Player.new("Gordo"), Player.new("Merlin"), Player.new("Jean"))
-game.play_round
+if $PROGRAM_NAME == __FILE__
+  game = GhostGame.new(
+    Aiplayer.new("Gizmo"), 
+    Aiplayer.new("TI-85"),
+    )
+
+  game.run
+end
